@@ -1,0 +1,29 @@
+#' Check for exclusiveness of two activities
+#'
+#' If activity A exists, Activity B should not exist, and vice versa.
+#'
+#' @param activity_a Activity A
+#' @param activity_b Activity B
+#'
+#' @export
+#'
+xor <- function(activity_a, activity_b) {
+  rule <- list()
+  rule$activity_a <- activity_a
+  rule$activity_b <- activity_b
+  class(rule) <- c("conformance_rule", "list")
+  attr(rule, "type") <- "xor"
+
+  attr(rule, "checker") <- function(eventlog, rule) {
+    eventlog %>%
+      group_by_case() %>%
+      mutate(rule_holds = !(any(!!activity_id_(eventlog) == rule$activity_a) &
+                             any(!!activity_id_(eventlog) == rule$activity_b))) %>%
+      ungroup_eventlog()
+  }
+  attr(rule, "label") <- paste0("xor_",
+                                str_replace(activity_a, "-| ", "_"),
+                                "_",
+                                str_replace(activity_b, "-| ", "_"))
+  return(rule)
+}
