@@ -7,10 +7,28 @@
 response(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A}
+\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 
-\item{activity_b}{Activity B}
+\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 }
 \description{
 If activity A is executed, it should be eventually followed by activity B.
+}
+\examples{
+library(bupaR)
+library(eventdataR)
+
+# A blood test should eventually be followed by Discuss Results
+
+patients \%>\%
+check_rule(response("Blood test","Discuss Results"))
+
+}
+\seealso{
+Other Declarative Rules: \code{\link{absent}},
+  \code{\link{and}}, \code{\link{contains_between}},
+  \code{\link{contains_exactly}}, \code{\link{contains}},
+  \code{\link{ends}}, \code{\link{precedence}},
+  \code{\link{responded_existence}}, \code{\link{starts}},
+  \code{\link{succession}}, \code{\link{xor}}
 }

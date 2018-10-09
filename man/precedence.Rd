@@ -7,10 +7,29 @@
 precedence(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A}
+\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 
-\item{activity_b}{Activity B}
+\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 }
 \description{
-If activity B occured, it should be preceded by activity A
+If activity B occured, it should be preceded by activity A in the same case.
+}
+\examples{
+library(bupaR)
+library(eventdataR)
+
+
+# A MRI Scan should be preceeded by a Blood test.
+
+patients \%>\%
+check_rule(precedence("Blood test","MRI SCAN"))
+
+}
+\seealso{
+Other Declarative Rules: \code{\link{absent}},
+  \code{\link{and}}, \code{\link{contains_between}},
+  \code{\link{contains_exactly}}, \code{\link{contains}},
+  \code{\link{ends}}, \code{\link{responded_existence}},
+  \code{\link{response}}, \code{\link{starts}},
+  \code{\link{succession}}, \code{\link{xor}}
 }

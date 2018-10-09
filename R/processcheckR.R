@@ -10,6 +10,7 @@
 #' @importFrom edeaR filter_activity
 #' @importFrom edeaR filter_precedence
 #' @importFrom stringr str_replace
+#' @importFrom glue glue
 
 
 globalVariables(c(".", ":="))

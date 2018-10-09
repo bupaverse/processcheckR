@@ -2,13 +2,31 @@
 % Please edit documentation in R/ends.R
 \name{ends}
 \alias{ends}
-\title{Check if cases end with an activity}
+\title{Check if cases end with an activity.}
 \usage{
 ends(activity)
 }
 \arguments{
-\item{activity}{The end activity. Character vector of length one.}
+\item{activity}{The end activity. Character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 }
 \description{
-Check if cases end with an activity
+Check if cases end with an activity.
+}
+\examples{
+library(bupaR)
+library(eventdataR)
+
+
+# A patient's last activity should be the Check-out
+patients \%>\%
+check_rule(ends("Check-out"))
+}
+\seealso{
+Other Declarative Rules: \code{\link{absent}},
+  \code{\link{and}}, \code{\link{contains_between}},
+  \code{\link{contains_exactly}}, \code{\link{contains}},
+  \code{\link{precedence}},
+  \code{\link{responded_existence}},
+  \code{\link{response}}, \code{\link{starts}},
+  \code{\link{succession}}, \code{\link{xor}}
 }

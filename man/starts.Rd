@@ -7,8 +7,26 @@
 starts(activity)
 }
 \arguments{
-\item{activity}{The start activity. Character vector of length one}
+\item{activity}{The start activity. Character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 }
 \description{
 Check if cases start with an activity
+}
+\examples{
+library(bupaR)
+library(eventdataR)
+
+# Each patients should first be registered.
+patients \%>\%
+check_rule(starts("Registration"))
+
+}
+\seealso{
+Other Declarative Rules: \code{\link{absent}},
+  \code{\link{and}}, \code{\link{contains_between}},
+  \code{\link{contains_exactly}}, \code{\link{contains}},
+  \code{\link{ends}}, \code{\link{precedence}},
+  \code{\link{responded_existence}},
+  \code{\link{response}}, \code{\link{succession}},
+  \code{\link{xor}}
 }

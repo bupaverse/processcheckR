@@ -1,24 +1,27 @@
 ---
-output: github_document
+title: "Rule-Based Conformance Checking"
+author: "Gert Janssenswillen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rule-Based Conformance Checking}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, echo = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
+  comment = "#>"
 )
 ```
-
-# processcheckR
 
 The goal of processcheckR is to support rule-based conformance checking. Currently the following declarative rules can be checked:
 
 Cardinality rules:
-* `exists`: activity occurs n times or more
-* `exists_exactly`: activity occurs exactly n times
+* `contains`: activity occurs n times or more
+* `contains_exactly`: activity occurs exactly n times
+* `contains_between`: activity occures between min and max number of times
 * `absent`: activity does not occur more than n - 1 times
 Ordering rules:
 * `starts`: case starts with activity

@@ -7,10 +7,30 @@
 responded_existence(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A}
+\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 
-\item{activity_b}{Activity B}
+\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
 }
 \description{
 If activity A occurs in a case, activity B should also occur (before or after).
+}
+\examples{
+library(bupaR)
+library(eventdataR)
+
+
+# When a Blood test occurs, a MRI Scan should also have
+# happened for this patient (before or after the test).
+
+patients \%>\%
+check_rule(responded_existence("Blood test","MRI SCAN"))
+
+}
+\seealso{
+Other Declarative Rules: \code{\link{absent}},
+  \code{\link{and}}, \code{\link{contains_between}},
+  \code{\link{contains_exactly}}, \code{\link{contains}},
+  \code{\link{ends}}, \code{\link{precedence}},
+  \code{\link{response}}, \code{\link{starts}},
+  \code{\link{succession}}, \code{\link{xor}}
 }
