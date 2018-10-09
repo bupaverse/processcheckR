@@ -5,12 +5,12 @@ processcheckR
 
 The goal of processcheckR is to support rule-based conformance checking. Currently the following declarative rules can be checked:
 
--   `exists`: activity occurs n times or more
--   `exists_exactly`: activity occurs exactly n times
+-   `contains`: activity occurs n times or more
+-   `contains_exactly`: activity occurs exactly n times
 -   `absent`: activity does not occur more than n - 1 times
 -   `starts`: case starts with activity
 -   `ends`: case ends with activity
--   `co_exists`: two activities always exist together
+-   `and`: two activities always exist together
 -   `succession`: if activity A happens, B should happen after. If B happens, A should have happened before.
 -   `response`: if activity A happens, B should happen after
 -   `precedence`: if activity B happens, A should have happend before
