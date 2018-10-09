@@ -57,7 +57,7 @@ sepsis %>%
   # check if cases starts with "ER Registration"
   check_rule(starts("ER Registration"), label = "r1") %>%
   # check if activities "CRP" and "LacticAcid" occur together
-  check_rule(co_exists("CRP","LacticAcid"), label = "r2") %>%
+  check_rule(and("CRP","LacticAcid"), label = "r2") %>%
   group_by(r1, r2) %>%
   n_cases() 
 #> # A tibble: 4 x 3
