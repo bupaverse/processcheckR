@@ -19,18 +19,23 @@ knitr::opts_chunk$set(
 The goal of processcheckR is to support rule-based conformance checking. Currently the following declarative rules can be checked:
 
 Cardinality rules:
+
 * `contains`: activity occurs n times or more
 * `contains_exactly`: activity occurs exactly n times
 * `contains_between`: activity occures between min and max number of times
 * `absent`: activity does not occur more than n - 1 times
+
 Ordering rules:
+
 * `starts`: case starts with activity
 * `ends`: case ends with activity
 * `succession`: if activity A happens, B should happen after. If B happens, A should have happened before.
 * `response`: if activity A happens, B should happen after
 * `precedence`: if activity B happens, A should have happend before
 * `responded_existence`: if activity A happens, B should also (have) happen(ed) (i.e. before or after A)
+
 Exclusiveness:
+
 * `and`: two activities always exist together
 * `xor`: two activities are not allowed to exist together
 
