@@ -28,7 +28,7 @@
 #' library(bupaR)
 #' library(eventdataR)
 #'
-#' # check whether MRI Scan is preceded by Blood test.
+#' # check whether MRI Scan is preceded by Blood test, and the case starts with Registration
 #' patients %>%
 #' check_rules(rule1 = precedence("Blood test","MRI SCAN"),
 #'             rule2 = start("Registration"))
@@ -41,7 +41,7 @@ check_rules <- function(eventlog, ...) {
   rules <- list(...)
 
   if(any(duplicated(names(rules)))) {
-    warning("Some rules have duplicate labels and will be overwritten")
+    warning("Some rules have duplicate labels and will be overwritten.")
   }
 
 
