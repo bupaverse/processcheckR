@@ -41,7 +41,8 @@ check_rule <- function(eventlog, rule, label = NULL) {
   }
   eventlog %>%
     attr(rule, "checker")(rule) %>%
-    rename(!!sym(label) := rule_holds)
+    mutate(!!sym(label) := rule_holds) %>%
+    select(-rule_holds)
 }
 
 

@@ -30,3 +30,4 @@ Other Declarative Rules: \code{\link{absent}},
   \code{\link{response}}, \code{\link{starts}},
   \code{\link{succession}}, \code{\link{xor}}
 }
+\concept{Declarative Rules}

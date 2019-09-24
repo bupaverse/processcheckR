@@ -3,6 +3,7 @@
 export(absent)
 export(and)
 export(check_rule)
+export(check_rules)
 export(contains)
 export(contains_between)
 export(contains_exactly)

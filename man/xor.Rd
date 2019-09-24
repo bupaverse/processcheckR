@@ -31,3 +31,4 @@ Other Declarative Rules: \code{\link{absent}},
   \code{\link{response}}, \code{\link{starts}},
   \code{\link{succession}}
 }
+\concept{Declarative Rules}

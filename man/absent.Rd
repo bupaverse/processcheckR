@@ -4,12 +4,12 @@
 \alias{absent}
 \title{Check if an activity is absent from a case}
 \usage{
-absent(activity, n = 1)
+absent(activity, n = 0)
 }
 \arguments{
 \item{activity}{The activity to check. Character vector of length one.}
 
-\item{n}{n-1 is the allowed number of occurences of the activity. E.g. n = 1 means the activity should be absent, n = 2 means it is allowed to occur once.}
+\item{n}{n is the allowed number of occurences of the activity. E.g. n = 0 means the activity should be absent, n = 1 means it is allowed to occur once.}
 }
 \description{
 The `absent` rule can be used to check whether an activity is absent in a case or not. The `n` parameter can be configured to create a different level of _absence_.
@@ -26,7 +26,7 @@ check_rule(absent("MRI SCAN"))
 # Check for which patients the activity "Blood test"
 # occurs maximum a single time, but not 2 times or more.
 patients \%>\%
-check_rule(absent("Blood test", n = 2))
+check_rule(absent("Blood test", n = 1))
 
 
 }
@@ -39,3 +39,4 @@ Other Declarative Rules: \code{\link{and}},
   \code{\link{response}}, \code{\link{starts}},
   \code{\link{succession}}, \code{\link{xor}}
 }
+\concept{Declarative Rules}

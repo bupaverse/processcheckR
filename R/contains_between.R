@@ -39,8 +39,10 @@ contains_between <- function(activity, min = 1, max = 1) {
 
     eventlog %>%
       filter_activity(activities = rule$activity) %>%
-      group_by(!!case_id_(eventlog)) %>%
+      group_by(!!case_id_(eventlog), .drop = F) %>%
       n_activity_instances() %>%
+      right_join(tibble(!!case_id_(eventlog) := case_labels(eventlog))) %>%
+      mutate(n_activity_instances = ifelse(is.na(n_activity_instances), 0, n_activity_instances)) %>%
       filter(between(n_activity_instances, rule$min, rule$max)) %>%
       pull(1) -> holds
 

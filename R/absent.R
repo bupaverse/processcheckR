@@ -5,8 +5,8 @@
 #'
 #'
 #' @param activity The activity to check. Character vector of length one.
-#' @param n n-1 is the allowed number of occurences of the activity. E.g. n = 1 means the activity should be absent, n = 2 means it is allowed to occur once.
-#'
+#' @param n n is the allowed number of occurences of the activity. E.g. n = 0 means the activity should be absent, n = 1 means it is allowed to occur once.
+
 #' @family Declarative Rules
 #'
 #' @examples
@@ -20,14 +20,14 @@
 #' # Check for which patients the activity "Blood test"
 #' # occurs maximum a single time, but not 2 times or more.
 #' patients %>%
-#' check_rule(absent("Blood test", n = 2))
+#' check_rule(absent("Blood test", n = 1))
 #'
 #'
 #' @export
 #'
-absent <- function(activity, n = 1) {
-  if(n < 1) {
-    stop("n should be greater than or equal to 1. Use exists to check for present activities.")
+absent <- function(activity, n = 0) {
+  if(n < 0) {
+    stop("n should be greater than or equal to 1.")
   }
   rule <- list()
   rule$activity <- activity
@@ -44,11 +44,11 @@ absent <- function(activity, n = 1) {
       filter_activity(activities = rule$activity) %>%
       group_by(!!case_id_(eventlog)) %>%
       n_activity_instances() %>%
-      filter(n_activity_instances >= rule$n) %>%
-      pull(1) -> holds
+      filter(n_activity_instances > rule$n) %>%
+      pull(1) -> holds_not
 
     eventlog %>%
-      mutate(rule_holds = !(!!case_id_(eventlog) %in% holds)) %>%
+      mutate(rule_holds = !(!!case_id_(eventlog) %in% holds_not)) %>%
       return()
   }
   attr(rule, "label") <- paste0("absent_", str_replace(activity,"-| ", "_"), "_", n)
