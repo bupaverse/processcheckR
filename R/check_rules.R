@@ -25,13 +25,13 @@
 #' @param eventlog Eventlog object
 #' @param ... Name-rule pairs.
 #' @examples
-#' library(bupaR)
+#'
 #' library(eventdataR)
 #'
-#' # check whether MRI Scan is preceded by Blood test.
-#' patients %>%
-#' check_rules(rule1 = precedence("Blood test","MRI SCAN"),
-#'             rule2 = start("Registration"))
+#' # check whether MRI Scan is preceded by Blood test, and the case starts with Registration
+#' check_rules(patients,
+#'             rule1 = precedence("Blood test","MRI SCAN"),
+#'             rule2 = starts("Registration"))
 #'
 #' @export
 #'
@@ -41,7 +41,7 @@ check_rules <- function(eventlog, ...) {
   rules <- list(...)
 
   if(any(duplicated(names(rules)))) {
-    warning("Some rules have duplicate labels and will be overwritten")
+    warning("Some rules have duplicate labels and will be overwritten.")
   }
 
 

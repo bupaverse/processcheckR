@@ -31,12 +31,12 @@ succession(),
 xor().
 }
 \examples{
-library(bupaR)
+
 library(eventdataR)
 
-# check whether MRI Scan is preceded by Blood test.
-patients \%>\%
-check_rules(rule1 = precedence("Blood test","MRI SCAN"),
-            rule2 = start("Registration"))
+# check whether MRI Scan is preceded by Blood test, and the case starts with Registration
+check_rules(patients,
+            rule1 = precedence("Blood test","MRI SCAN"),
+            rule2 = starts("Registration"))
 
 }
