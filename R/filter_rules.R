@@ -24,13 +24,11 @@
 #' @param eventlog Eventlog object
 #' @param ... rules
 #' @examples
-#' library(bupaR)
 #' library(eventdataR)
 #'
 #' # Filter where Blood test precedes MRI SCAN and Registration is the start of the case.
-#' patients %>%
-#' filter_rules( precedence("Blood test","MRI SCAN"),
-#'              start("Registration"))
+#' filter_rules(patients, precedence("Blood test","MRI SCAN"),
+#'              starts("Registration"))
 #'
 #' @export
 #'
