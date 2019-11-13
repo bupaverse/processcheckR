@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check for co-existence of two activities — and • processcheckR</title>
+<title>Check multiple declarative rules. — check_rules • processcheckR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,21 @@
 
 
 
-<meta property="og:title" content="Check for co-existence of two activities — and" />
+<meta property="og:title" content="Check multiple declarative rules. — check_rules" />
 
-<meta property="og:description" content="The`and` rule checks whether two activities both occur in a case (or are both absent).
-If activity A exists, Activity B should also exist, and vice versa." />
+<meta property="og:description" content="This function can be used to check several rules on event data. It needs an event log and a rule. Rules can be made with the following functions:
+absent(),
+and(),
+contains(),
+contains_between(),
+contains_exactly(),
+ends(),
+precedence(),
+response(),
+responded_existence(),
+starts(),
+succession(),
+xor()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,51 +127,58 @@ If activity A exists, Activity B should also exist, and vice versa." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check for co-existence of two activities</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bupaverse/processcheckr/blob/master/R/and.R'><code>R/and.R</code></a></small>
-    <div class="hidden name"><code>and.Rd</code></div>
+    <h1>Check multiple declarative rules.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bupaverse/processcheckr/blob/master/R/check_rules.R'><code>R/check_rules.R</code></a></small>
+    <div class="hidden name"><code>check_rules.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The`and` rule checks whether two activities both occur in a case (or are both absent).
-If activity A exists, Activity B should also exist, and vice versa.</p>
+    <p>This function can be used to check several rules on event data. It needs an event log and a rule. Rules can be made with the following functions:
+absent(),
+and(),
+contains(),
+contains_between(),
+contains_exactly(),
+ends(),
+precedence(),
+response(),
+responded_existence(),
+starts(),
+succession(),
+xor().</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>and</span>(<span class='no'>activity_a</span>, <span class='no'>activity_b</span>)</pre>
+    <pre class="usage"><span class='fu'>check_rules</span>(<span class='no'>eventlog</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>activity_a</th>
-      <td><p>Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.</p></td>
+      <th>eventlog</th>
+      <td><p>Eventlog object</p></td>
     </tr>
     <tr>
-      <th>activity_b</th>
-      <td><p>Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.</p></td>
+      <th>...</th>
+      <td><p>Name-rule pairs.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>Other Declarative Rules: <code><a href='absent.html'>absent</a></code>,
-  <code><a href='contains_between.html'>contains_between</a></code>,
-  <code><a href='contains_exactly.html'>contains_exactly</a></code>, <code><a href='contains.html'>contains</a></code>,
-  <code><a href='ends.html'>ends</a></code>, <code><a href='precedence.html'>precedence</a></code>,
-  <code><a href='responded_existence.html'>responded_existence</a></code>,
-  <code><a href='response.html'>response</a></code>, <code><a href='starts.html'>starts</a></code>,
-  <code><a href='succession.html'>succession</a></code>, <code><a href='xor.html'>xor</a></code></p></div>
+    <p>An annotated event log, where - for every rule - a new column indicates whether the rule holds or not.
+The name of each rule becomes the name of the column.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>bupaR</span>)
+    <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>eventdataR</span>)
 
-<span class='co'># Check that if a patients is registered, he's also checked-out, and vice versa.</span>
-<span class='no'>patients</span> <span class='kw'>%&gt;%</span>
-<span class='fu'><a href='check_rule.html'>check_rule</a></span>(<span class='fu'>and</span>(<span class='st'>"Registration"</span>,<span class='st'>"Check-out"</span>))</div><div class='output co'>#&gt; Log of 5442 events consisting of:
+<span class='co'># check whether MRI Scan is preceded by Blood test, and the case starts with Registration</span>
+<span class='fu'>check_rules</span>(<span class='no'>patients</span>,
+            <span class='kw'>rule1</span> <span class='kw'>=</span> <span class='fu'><a href='precedence.html'>precedence</a></span>(<span class='st'>"Blood test"</span>,<span class='st'>"MRI SCAN"</span>),
+            <span class='kw'>rule2</span> <span class='kw'>=</span> <span class='fu'><a href='starts.html'>starts</a></span>(<span class='st'>"Registration"</span>))</div><div class='output co'>#&gt; Log of 5442 events consisting of:
 #&gt; 7 traces 
 #&gt; 500 cases 
 #&gt; 2721 instances of 7 activities 
@@ -175,21 +193,21 @@ If activity A exists, Activity B should also exist, and vice versa.</p>
 #&gt; Timestamp:			time 
 #&gt; Lifecycle transition:		registration_type 
 #&gt; 
-#&gt; <span style='color: #555555;'># A tibble: 5,442 x 8</span><span>
+#&gt; <span style='color: #555555;'># A tibble: 5,442 x 9</span><span>
 #&gt;    handling patient employee handling_id registration_ty~ time               
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span> Registr~ 1       r1       1           start            2017-01-02 </span><span style='color: #555555;'>11:41:53</span><span>
 #&gt; </span><span style='color: #555555;'> 2</span><span> Registr~ 2       r1       2           start            2017-01-02 </span><span style='color: #555555;'>11:41:53</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> Registr~ 3       r1       3           start            2017-01-04 </span><span style='color: #555555;'>01:34:05</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span> Registr~ 4       r1       4           start            2017-01-04 </span><span style='color: #555555;'>01:34:04</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span> Registr~ 5       r1       5           start            2017-01-04 </span><span style='color: #555555;'>16:07:47</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span> Registr~ 6       r1       6           start            2017-01-04 </span><span style='color: #555555;'>16:07:47</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> Registr~ 7       r1       7           start            2017-01-05 </span><span style='color: #555555;'>04:56:11</span><span>
-#&gt; </span><span style='color: #555555;'> 8</span><span> Registr~ 8       r1       8           start            2017-01-05 </span><span style='color: #555555;'>04:56:11</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span> Registr~ 9       r1       9           start            2017-01-06 </span><span style='color: #555555;'>05:58:54</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span> Registr~ 10      r1       10          start            2017-01-06 </span><span style='color: #555555;'>05:58:54</span><span>
-#&gt; </span><span style='color: #555555;'># ... with 5,432 more rows, and 2 more variables: .order </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   and_Registration_Check_out </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'> 3</span><span> Triage ~ 1       r2       501         start            2017-01-02 </span><span style='color: #555555;'>12:40:20</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> Registr~ 1       r1       1           complete         2017-01-02 </span><span style='color: #555555;'>12:40:20</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> Registr~ 2       r1       2           complete         2017-01-02 </span><span style='color: #555555;'>15:16:38</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> Triage ~ 2       r2       502         start            2017-01-02 </span><span style='color: #555555;'>22:32:25</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> Triage ~ 1       r2       501         complete         2017-01-02 </span><span style='color: #555555;'>22:32:25</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> Triage ~ 2       r2       502         complete         2017-01-03 </span><span style='color: #555555;'>12:34:01</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> Registr~ 4       r1       4           start            2017-01-04 </span><span style='color: #555555;'>01:34:04</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> Registr~ 3       r1       3           start            2017-01-04 </span><span style='color: #555555;'>01:34:05</span><span>
+#&gt; </span><span style='color: #555555;'># ... with 5,432 more rows, and 3 more variables: .order </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, rule1 </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,
+#&gt; #   rule2 </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -197,7 +215,7 @@ If activity A exists, Activity B should also exist, and vice versa.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
