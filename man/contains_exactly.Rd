@@ -25,12 +25,17 @@ check_rule(contains_exactly("Registration", n = 1))
 
 }
 \seealso{
-Other Declarative Rules: \code{\link{absent}},
-  \code{\link{and}}, \code{\link{contains_between}},
-  \code{\link{contains}}, \code{\link{ends}},
-  \code{\link{precedence}},
-  \code{\link{responded_existence}},
-  \code{\link{response}}, \code{\link{starts}},
-  \code{\link{succession}}, \code{\link{xor}}
+Other Declarative Rules: 
+\code{\link{absent}()},
+\code{\link{and}()},
+\code{\link{contains_between}()},
+\code{\link{contains}()},
+\code{\link{ends}()},
+\code{\link{precedence}()},
+\code{\link{responded_existence}()},
+\code{\link{response}()},
+\code{\link{starts}()},
+\code{\link{succession}()},
+\code{\link{xor}()}
 }
 \concept{Declarative Rules}

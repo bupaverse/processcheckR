@@ -13,7 +13,7 @@ absent(activity, n = 0)
 }
 \description{
 The `absent` rule can be used to check whether an activity is absent in a case or not. The `n` parameter can be configured to create a different level of _absence_.
-When n = 1, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n-1`.
+When n = 0, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n`.
 }
 \examples{
 library(bupaR)
@@ -31,12 +31,17 @@ check_rule(absent("Blood test", n = 1))
 
 }
 \seealso{
-Other Declarative Rules: \code{\link{and}},
-  \code{\link{contains_between}},
-  \code{\link{contains_exactly}}, \code{\link{contains}},
-  \code{\link{ends}}, \code{\link{precedence}},
-  \code{\link{responded_existence}},
-  \code{\link{response}}, \code{\link{starts}},
-  \code{\link{succession}}, \code{\link{xor}}
+Other Declarative Rules: 
+\code{\link{and}()},
+\code{\link{contains_between}()},
+\code{\link{contains_exactly}()},
+\code{\link{contains}()},
+\code{\link{ends}()},
+\code{\link{precedence}()},
+\code{\link{responded_existence}()},
+\code{\link{response}()},
+\code{\link{starts}()},
+\code{\link{succession}()},
+\code{\link{xor}()}
 }
 \concept{Declarative Rules}

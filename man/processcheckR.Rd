@@ -3,7 +3,6 @@
 \docType{package}
 \name{processcheckR}
 \alias{processcheckR}
-\alias{processcheckR-package}
 \title{processcheckR - Check rules in event data}
 \description{
 Tools to check declarative rules in event logs.

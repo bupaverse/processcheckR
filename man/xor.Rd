@@ -23,12 +23,17 @@ patients \%>\%
 check_rule(xor("X-Ray","MRI SCAN"))
 }
 \seealso{
-Other Declarative Rules: \code{\link{absent}},
-  \code{\link{and}}, \code{\link{contains_between}},
-  \code{\link{contains_exactly}}, \code{\link{contains}},
-  \code{\link{ends}}, \code{\link{precedence}},
-  \code{\link{responded_existence}},
-  \code{\link{response}}, \code{\link{starts}},
-  \code{\link{succession}}
+Other Declarative Rules: 
+\code{\link{absent}()},
+\code{\link{and}()},
+\code{\link{contains_between}()},
+\code{\link{contains_exactly}()},
+\code{\link{contains}()},
+\code{\link{ends}()},
+\code{\link{precedence}()},
+\code{\link{responded_existence}()},
+\code{\link{response}()},
+\code{\link{starts}()},
+\code{\link{succession}()}
 }
 \concept{Declarative Rules}
