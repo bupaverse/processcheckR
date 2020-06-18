@@ -22,12 +22,17 @@ patients \%>\%
 check_rule(ends("Check-out"))
 }
 \seealso{
-Other Declarative Rules: \code{\link{absent}},
-  \code{\link{and}}, \code{\link{contains_between}},
-  \code{\link{contains_exactly}}, \code{\link{contains}},
-  \code{\link{precedence}},
-  \code{\link{responded_existence}},
-  \code{\link{response}}, \code{\link{starts}},
-  \code{\link{succession}}, \code{\link{xor}}
+Other Declarative Rules: 
+\code{\link{absent}()},
+\code{\link{and}()},
+\code{\link{contains_between}()},
+\code{\link{contains_exactly}()},
+\code{\link{contains}()},
+\code{\link{precedence}()},
+\code{\link{responded_existence}()},
+\code{\link{response}()},
+\code{\link{starts}()},
+\code{\link{succession}()},
+\code{\link{xor}()}
 }
 \concept{Declarative Rules}

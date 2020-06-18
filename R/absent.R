@@ -1,7 +1,7 @@
 #' Check if an activity is absent from a case
 #'
 #' The `absent` rule can be used to check whether an activity is absent in a case or not. The `n` parameter can be configured to create a different level of _absence_.
-#' When n = 1, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n-1`.
+#' When n = 0, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n`.
 #'
 #'
 #' @param activity The activity to check. Character vector of length one.

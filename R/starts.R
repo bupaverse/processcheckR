@@ -25,10 +25,12 @@ starts <- function(activity) {
 
 
     eventlog %>%
+      as.data.frame() %>%
       group_by(!!case_id_(eventlog)) %>%
       arrange(!!timestamp_(eventlog)) %>%
       mutate(rule_holds = first(!!activity_id_(eventlog) == rule$activity)) %>%
-      ungroup_eventlog() %>%
+      ungroup() %>%
+      re_map(mapping(eventlog)) %>%
       return()
   }
   attr(rule, "label") <- paste0("starts_with_", str_replace(activity, "-| ", "_"))
