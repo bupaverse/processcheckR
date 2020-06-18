@@ -1,14 +1,14 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----gh-installation, eval = FALSE---------------------------------------
+## ----gh-installation, eval = FALSE--------------------------------------------
 #  # install.packages("devtools")
 #  devtools::install_github("gertjanssenswillen/processcheckR")
 
-## ----example-------------------------------------------------------------
+## ----example------------------------------------------------------------------
 library(bupaR)
 library(processcheckR)
 sepsis %>%
