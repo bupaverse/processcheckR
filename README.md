@@ -1,25 +1,49 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-processcheckR
-=============
 
-The goal of processcheckR is to support rule-based conformance checking. Currently the following declarative rules can be checked:
+# processcheckR <a href="https://bupaverse.github.io/processcheckR/"><img src="man/figures/logo.png" align="right" height="50" /></a>
 
--   `contains`: activity occurs n times or more
--   `contains_exactly`: activity occurs exactly n times
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/processcheckR)](https://CRAN.R-project.org/package=processcheckR)
+[![R-CMD-check](https://github.com/bupaverse/processcheckR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bupaverse/processcheckR/actions/workflows/R-CMD-check.yaml)
+[![Codecov](https://codecov.io/gh/bupaverse/processcheckR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bupaverse/processcheckR?branch=master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+The goal of processcheckR is to support rule-based conformance checking.
+Currently the following declarative rules can be checked:
+
+Cardinality rules:
+
+-   `exists`: activity occurs n times or more
+-   `exists_exactly`: activity occurs exactly n times
 -   `absent`: activity does not occur more than n - 1 times
+
+Ordering rules:
+
 -   `starts`: case starts with activity
 -   `ends`: case ends with activity
--   `and`: two activities always exist together
--   `succession`: if activity A happens, B should happen after. If B happens, A should have happened before.
+-   `succession`: if activity A happens, B should happen after. If B
+    happens, A should have happened before.
 -   `response`: if activity A happens, B should happen after
 -   `precedence`: if activity B happens, A should have happend before
--   `responded_existence`: if activity A happens, B should also (have) happen(ed) (i.e. before or after A)
+-   `responded_existence`: if activity A happens, B should also (have)
+    happen(ed) (i.e. before or after A)
 
-Rules can be checked using the `check_rule` function (see example below). It will create a new logical variable to indicate for which cases the rule holds. The name of the variable can be configured using the `label` argument in `check_rule`.
+Exclusiveness:
 
-Installation
-------------
+-   `and`: two activities always exist together
+-   `xor`: two activities are not allowed to exist together
+
+Rules can be checked using the `check_rule` function (see example
+below). It will create a new logical variable to indicate for which
+cases the rule holds. The name of the variable can be configured using
+the `label` argument in `check_rule`.
+
+## Installation
 
 You can install processcheckR from github with:
 
@@ -28,17 +52,10 @@ You can install processcheckR from github with:
 devtools::install_github("gertjanssenswillen/processcheckR")
 ```
 
-Example
--------
+## Example
 
 ``` r
 library(bupaR)
-#> Loading required package: edeaR
-#> Loading required package: eventdataR
-#> Loading required package: processmapR
-#> Loading required package: xesreadR
-#> Loading required package: processmonitR
-#> Loading required package: petrinetR
 #> 
 #> Attaching package: 'bupaR'
 #> The following object is masked from 'package:stats':
@@ -52,7 +69,7 @@ library(processcheckR)
 #> Attaching package: 'processcheckR'
 #> The following object is masked from 'package:base':
 #> 
-#>     exists
+#>     xor
 sepsis %>%
   # check if cases starts with "ER Registration"
   check_rule(starts("ER Registration"), label = "r1") %>%
@@ -60,8 +77,7 @@ sepsis %>%
   check_rule(and("CRP","LacticAcid"), label = "r2") %>%
   group_by(r1, r2) %>%
   n_cases() 
-#> # A tibble: 4 x 3
-#> # Groups:   r1 [?]
+#> # A tibble: 4 × 3
 #>   r1    r2    n_cases
 #>   <lgl> <lgl>   <int>
 #> 1 FALSE FALSE      10

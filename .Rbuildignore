@@ -3,3 +3,8 @@
 ^README\.Rmd$
 ^README-.*\.png$
 docs/*
+^\.github$
+^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
