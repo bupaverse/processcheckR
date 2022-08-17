@@ -7,7 +7,7 @@
 contains_exactly(activity, n = 1)
 }
 \arguments{
-\item{activity}{Activity too check. A character vector of length one. This should be an activity of the event log supplied to `check_rule`.}
+\item{activity}{Activity too check. A character vector of length one. This should be an activity of the event log supplied to \code{check_rule}.}
 
 \item{n}{The exact number of times the activity should be present.}
 }

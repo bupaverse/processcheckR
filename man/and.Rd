@@ -7,12 +7,12 @@
 and(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
 }
 \description{
-The`and` rule checks whether two activities both occur in a case (or are both absent).
+The\code{and} rule checks whether two activities both occur in a case (or are both absent).
 If activity A exists, Activity B should also exist, and vice versa.
 }
 \examples{

@@ -5,14 +5,16 @@
 #' @docType package
 #' @name processcheckR
 #'
+## usethis namespace: start
 #' @import dplyr
 #' @import bupaR
 #' @importFrom edeaR filter_activity
 #' @importFrom edeaR filter_precedence
 #' @importFrom stringr str_replace
 #' @importFrom glue glue
-
+#' @importFrom lifecycle deprecated
+## usethis namespace: end
 
 globalVariables(c(".", ":="))
-
+"_PACKAGE"
 NULL

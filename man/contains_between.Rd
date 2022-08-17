@@ -7,7 +7,7 @@
 contains_between(activity, min = 1, max = 1)
 }
 \arguments{
-\item{activity}{Activity too check. Character vector of length one. This should be an activity of the event log supplied with `check_rule`}
+\item{activity}{Activity too check. Character vector of length one. This should be an activity of the event log supplied with \code{check_rule}}
 
 \item{min}{The minimum number of times the activity should be present.}
 
@@ -15,7 +15,7 @@ contains_between(activity, min = 1, max = 1)
 }
 \description{
 This rules examines whether the supplied activity is present in a case for a certain interval of times.
-The arguments `min` and `max` can be used to specify the allowed interval of occurences.
+The arguments \code{min} and \code{max} can be used to specify the allowed interval of occurences.
 }
 \examples{
 library(bupaR)

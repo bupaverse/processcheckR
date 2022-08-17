@@ -12,8 +12,8 @@ absent(activity, n = 0)
 \item{n}{n is the allowed number of occurences of the activity. E.g. n = 0 means the activity should be absent, n = 1 means it is allowed to occur once.}
 }
 \description{
-The `absent` rule can be used to check whether an activity is absent in a case or not. The `n` parameter can be configured to create a different level of _absence_.
-When n = 0, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n`.
+The \code{absent} rule can be used to check whether an activity is absent in a case or not. The \code{n} parameter can be configured to create a different level of \emph{absence}.
+When n = 0, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is \code{n}.
 }
 \examples{
 library(bupaR)

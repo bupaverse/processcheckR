@@ -7,7 +7,7 @@
 starts(activity)
 }
 \arguments{
-\item{activity}{The start activity. Character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity}{The start activity. Character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
 }
 \description{
 Check if cases start with an activity

@@ -17,7 +17,8 @@ Imports:
     rlang,
     edeaR (>= 0.9.0),
     stringr,
-    glue
+    glue,
+    lifecycle
 RoxygenNote: 7.2.1
 Suggests: 
     knitr,
@@ -31,3 +32,4 @@ URL: https://www.bupar.net,
     https://bupaverse.github.io/processcheckR/
 BugReports: https://github.com/bupaverse/processcheckr/issues
 Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)

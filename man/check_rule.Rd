@@ -2,41 +2,56 @@
 % Please edit documentation in R/check_rule.R
 \name{check_rule}
 \alias{check_rule}
-\title{Check declarative rules.}
+\alias{check_rule.log}
+\title{Check Declarative Rule}
 \usage{
-check_rule(eventlog, rule, label = NULL)
+check_rule(log, rule, label = NULL, eventlog = deprecated())
+
+\method{check_rule}{log}(log, rule, label = NULL, eventlog = deprecated())
 }
 \arguments{
-\item{eventlog}{Eventlog object}
+\item{log}{\code{\link[bupaR]{log}}: Object of class \code{\link[bupaR]{log}} or derivatives (\code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.).}
 
 \item{rule}{A rule create by a rule function.}
 
-\item{label}{Optionally, the variable name under which the result of the rule should be stored.}
+\item{label}{\code{\link{character}} (default \code{\link{NULL}}): Optionally, the column name under which the result of the rule should be stored.}
+
+\item{eventlog}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}; please use \code{log} instead.}
 }
 \value{
-An annotated event log, where a new column indicates whether the rule holds or not. The name of the new column can optionally be set using the "label" argument.
+An annotated log (of same type as input), where a new column indicates whether the rule holds or not.
+The name of the new column can optionally be set using the \code{label} argument.
 }
 \description{
-This function can be used to check rules on event data. It needs an event log and a rule. Rules can be made with the following functions:
-absent(),
-and(),
-contains(),
-contains_between(),
-contains_exactly(),
-ends(),
-precedence(),
-response(),
-responded_existence(),
-starts(),
-succession(),
-xor().
+This function can be used to check rules on event data. It needs a \code{log} (object of class \code{\link[bupaR]{log}} or derivatives,
+e.g. \code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.). and a \code{rule}.
+Rules can be made with the following functions:
+\itemize{
+\item \code{\link{absent}},
+\item \code{\link{and}},
+\item \code{\link{contains}},
+\item \code{\link{contains_between}},
+\item \code{\link{contains_exactly}},
+\item \code{\link{ends}},
+\item \code{\link{precedence}},
+\item \code{\link{response}},
+\item \code{\link{responded_existence}},
+\item \code{\link{starts}},
+\item \code{\link{succession}},
+\item \code{\link{xor}}.
 }
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{check_rule(log)}: Check rule on an \code{\link[bupaR]{log}}.
+
+}}
 \examples{
 library(bupaR)
 library(eventdataR)
 
 # check whether MRI Scan is preceded by Blood test.
 patients \%>\%
-check_rule(precedence("Blood test","MRI SCAN"))
+ check_rule(precedence("Blood test","MRI SCAN"))
 
 }

@@ -12,7 +12,7 @@ contains(activity, n = 1)
 \item{n}{The minimum number of times the activity should be present.}
 }
 \description{
-This rules examines whether the supplied activity is present in a case or not. The argument `n` can be used to set a minimum number of occurences that should be present in each case. Using the function `check_rule`, this information can be added to the event log.
+This rules examines whether the supplied activity is present in a case or not. The argument \code{n} can be used to set a minimum number of occurences that should be present in each case. Using the function \code{check_rule}, this information can be added to the event log.
 }
 \examples{
 library(bupaR)
