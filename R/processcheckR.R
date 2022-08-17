@@ -3,6 +3,7 @@
 #' @description  Tools to check declarative rules in event logs.
 
 #' @docType package
+#' @keywords internal
 #' @name processcheckR
 #'
 ## usethis namespace: start
