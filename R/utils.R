@@ -8,6 +8,13 @@ resource_id_ <- function(eventlog) sym(resource_id(eventlog))
 timestamp_ <- function(eventlog) sym(timestamp(eventlog))
 lifecycle_id_ <- function(eventlog) sym(lifecycle_id(eventlog))
 
+check_activity_in_log <- function(activity, log) {
+
+  if(!(activity %in% activity_labels(log))) {
+    stop(glue("Activity {activity} not found in log."))
+  }
+}
+
 # Warning: The `eventlog` argument of `func()` is deprecated as of processcheckR 0.2.0.
 # Please use the `log` argument instead.
 # WARNING: Works only on exported functions!

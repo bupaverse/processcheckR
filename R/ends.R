@@ -33,33 +33,17 @@ ends_checker <- function(log, rule) {
 
 ends_checker.eventlog <- function(log, rule) {
 
-  if(!(rule$activity %in% activity_labels(log))) {
-    stop(glue("Activity {rule$activity} not found in log."))
-  }
+  check_activity_in_log(rule$activity, log)
 
   log %>%
-    group_by(.data[[case_id(log)]]) %>%
+    group_by_case() %>%
     arrange(.data[[timestamp(log)]]) %>%
     mutate(rule_holds = last(.data[[activity_id(log)]] == rule$activity)) %>%
     ungroup_eventlog()
-}
-
-ends_checker.grouped_eventlog <- function(log, rule) {
-
-  log %>%
-    ungroup_eventlog() %>%
-    ends_checker.eventlog(rule)
 }
 
 ends_checker.activitylog <- function(log, rule) {
 
   ends_checker.eventlog(bupaR::to_eventlog(log), rule) %>%
     bupaR::to_activitylog()
-}
-
-ends_checker.grouped_activitylog <- function(log, rule) {
-
-  log %>%
-    ungroup_eventlog() %>%
-    ends_checker.activitylog(rule)
 }
