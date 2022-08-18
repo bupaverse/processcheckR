@@ -23,9 +23,11 @@
 #' The name of the new column can optionally be set using the `label` argument.
 #'
 #' @param log \code{\link[bupaR]{log}}: Object of class \code{\link[bupaR]{log}} or derivatives (\code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.).
-#' @param rule A rule create by a rule function.
+#' @param rule A rule created by a rule function.
 #' @param label \code{\link{character}} (default \code{\link{NULL}}): Optionally, the column name under which the result of the rule should be stored.
 #' @param eventlog `r lifecycle::badge("deprecated")`; please use \code{log} instead.
+#'
+#' @seealso \code{\link{check_rules}}
 #'
 #' @examples
 #' library(bupaR)

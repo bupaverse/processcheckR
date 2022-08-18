@@ -1,42 +1,34 @@
-
-
-#' Check multiple declarative rules.
-#'
-#' This function can be used to check several rules on event data. It needs an event log and a rule. Rules can be made with the following functions:
-#' absent(),
-#' and(),
-#' contains(),
-#' contains_between(),
-#' contains_exactly(),
-#' ends(),
-#' precedence(),
-#' response(),
-#' responded_existence(),
-#' starts(),
-#' succession(),
-#' xor().
+#' @title Check Multiple Declarative Rules
 #'
 #' @return
-#'
-#' An annotated event log, where - for every rule - a new column indicates whether the rule holds or not.
+#' An annotated log (of same type as input), where – for every rule – a new column indicates whether the rule holds or not.
 #' The name of each rule becomes the name of the column.
 #'
+#' @param ... Name-rule pairs created by rule functions.
 #'
-#' @param eventlog Eventlog object
-#' @param ... Name-rule pairs.
+#' @inherit check_rule params description
+#'
+#' @seealso \code{\link{check_rule}}
+#'
 #' @examples
-#'
+#' library(bupaR)
 #' library(eventdataR)
 #'
-#' # check whether MRI Scan is preceded by Blood test, and the case starts with Registration
-#' check_rules(patients,
-#'             rule1 = precedence("Blood test","MRI SCAN"),
-#'             rule2 = starts("Registration"))
+#' # Check whether MRI Scan is preceded by Blood test, and the case starts with Registration.
+#' patients %>%
+#'  check_rules(rule1 = precedence("Blood test","MRI SCAN"),
+#'              rule2 = starts("Registration"))
 #'
-#' @export
-#'
-check_rules <- function(eventlog, ...) {
+#' @export check_rules
+check_rules <- function(log, ..., eventlog = deprecated()) {
+  UseMethod("check_rules")
+}
 
+#' @describeIn check_rules Check rules on an \code{\link[bupaR]{log}}.
+#' @export
+check_rules.log <- function(log, ..., eventlog = deprecated()) {
+
+  log <- lifecycle_warning_eventlog(log, eventlog)
 
   rules <- list(...)
 
@@ -44,12 +36,11 @@ check_rules <- function(eventlog, ...) {
     warning("Some rules have duplicate labels and will be overwritten.")
   }
 
-
   for(i in seq_along(rules)) {
-     eventlog <- check_rule(eventlog, rules[[i]], label = names(rules)[i])
+     log <- check_rule(log, rules[[i]], label = names(rules)[i])
   }
 
-  eventlog
+  return(log)
 }
 
 

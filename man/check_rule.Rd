@@ -12,7 +12,7 @@ check_rule(log, rule, label = NULL, eventlog = deprecated())
 \arguments{
 \item{log}{\code{\link[bupaR]{log}}: Object of class \code{\link[bupaR]{log}} or derivatives (\code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.).}
 
-\item{rule}{A rule create by a rule function.}
+\item{rule}{A rule created by a rule function.}
 
 \item{label}{\code{\link{character}} (default \code{\link{NULL}}): Optionally, the column name under which the result of the rule should be stored.}
 
@@ -54,4 +54,7 @@ library(eventdataR)
 patients \%>\%
  check_rule(precedence("Blood test","MRI SCAN"))
 
+}
+\seealso{
+\code{\link{check_rules}}
 }
