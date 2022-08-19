@@ -45,5 +45,6 @@ starts_checker.eventlog <- function(log, rule) {
 starts_checker.activitylog <- function(log, rule) {
 
   starts_checker.eventlog(bupaR::to_eventlog(log), rule) %>%
-    bupaR::to_activitylog()
+    bupaR::to_activitylog() %>%
+    drop_generated_columns()
 }

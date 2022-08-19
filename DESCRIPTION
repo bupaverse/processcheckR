@@ -25,6 +25,7 @@ Suggests:
     rmarkdown,
     eventdataR,
     covr,
+    compare,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 URL: https://www.bupar.net,
