@@ -2,17 +2,21 @@
 % Please edit documentation in R/contains.R
 \name{contains}
 \alias{contains}
-\title{Check if activity is present (contained) in a case}
+\title{Contains}
 \usage{
 contains(activity, n = 1)
 }
 \arguments{
-\item{activity}{Activity to check. A character vector of length one. Should be an activity of the eventlog supplied with check_rule.}
+\item{activity}{\code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{n}{The minimum number of times the activity should be present.}
+\item{n}{\code{\link{numeric}} (default \code{1}): The minimum number of times the activity should be present.
+Should be greater than or equal to 1. Use \code{\link{absent}} instead to check for absent (i.e. \code{n = 0}) activities.}
 }
 \description{
-This rules examines whether the supplied activity is present in a case or not. The argument \code{n} can be used to set a minimum number of occurences that should be present in each case. Using the function \code{check_rule}, this information can be added to the event log.
+Check if the specified activity is present (contained) in a case.
+
+The \code{contains} rule examines whether the supplied \code{activity} is present in a case or not.
+The argument \code{n} can be used to set a minimum number of occurences that should be present in each case.
 }
 \examples{
 library(bupaR)
@@ -20,15 +24,16 @@ library(eventdataR)
 
 # Each patient should be registered at least once.
 patients \%>\%
-check_rule(contains("Registration"))
+ check_rule(contains("Registration"))
 
 # Check whether some patients have received 2 or more blood tests.
-
 patients \%>\%
-check_rule(contains("Blood test", n = 2))
+ check_rule(contains("Blood test", n = 2))
 
 }
 \seealso{
+\code{\link{absent}},\code{\link{contains_between}},\code{\link{contains_exactly}}
+
 Other Declarative Rules: 
 \code{\link{absent}()},
 \code{\link{and}()},

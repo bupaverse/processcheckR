@@ -28,7 +28,7 @@ test_that("test absent on eventlog with arg n > 1", {
 
   # Only John Doe has twice "surgery".
   expect_true(all(absent[absent$patient == "John Doe",]$absent_surgery_2))
-  expect_false(all(absent[absent$patient != "John Doe",]$absent_surgery_2))
+  expect_false(any(absent[absent$patient != "John Doe",]$absent_surgery_2))
 })
 
 test_that("test absent on eventlog fails on non-existing activity", {
@@ -81,7 +81,7 @@ test_that("test absent on activitylog with arg n > 2", {
 
   # Only John Doe has twice "surgery".
   expect_true(all(absent[absent$patient == "John Doe",]$absent_surgery_2))
-  expect_false(all(absent[absent$patient != "John Doe",]$absent_surgery_2))
+  expect_false(any(absent[absent$patient != "John Doe",]$absent_surgery_2))
 })
 
 test_that("test absent on grouped_activitylog", {
