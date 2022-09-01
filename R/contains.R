@@ -6,8 +6,8 @@
 #' The argument `n` can be used to set a minimum number of occurences that should be present in each case.
 #'
 #' @param activity \code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.
-#' @param n \code{\link{numeric}} (default \code{1}): The minimum number of times the activity should be present.
-#' Should be greater than or equal to 1. Use \code{\link{absent}} instead to check for absent (i.e. `n = 0`) activities.
+#' @param n \code{\link{numeric}} (default `1`): The minimum number of times the activity should be present.
+#' Should be greater than or equal to `1`. Use \code{\link{absent}} instead to check for absent (i.e. `n = 0`) activities.
 #'
 #' @family Declarative Rules
 #'

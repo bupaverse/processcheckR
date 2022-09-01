@@ -10,7 +10,7 @@ contains(activity, n = 1)
 \item{activity}{\code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
 \item{n}{\code{\link{numeric}} (default \code{1}): The minimum number of times the activity should be present.
-Should be greater than or equal to 1. Use \code{\link{absent}} instead to check for absent (i.e. \code{n = 0}) activities.}
+Should be greater than or equal to \code{1}. Use \code{\link{absent}} instead to check for absent (i.e. \code{n = 0}) activities.}
 }
 \description{
 Check if the specified activity is present (contained) in a case.

@@ -18,7 +18,8 @@ Imports:
     edeaR (>= 0.9.0),
     stringr,
     glue,
-    lifecycle
+    lifecycle,
+    tidyr
 RoxygenNote: 7.2.1
 Suggests: 
     knitr,

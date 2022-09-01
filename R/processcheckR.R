@@ -14,6 +14,7 @@
 #' @importFrom stringr str_replace
 #' @importFrom glue glue
 #' @importFrom lifecycle deprecated
+#' @importFrom tidyr replace_na
 ## usethis namespace: end
 
 globalVariables(c(".", ":="))
