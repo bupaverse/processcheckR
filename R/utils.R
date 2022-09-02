@@ -15,11 +15,11 @@ check_activity_in_log <- function(activity, log) {
   }
 }
 
-# Drop the generated columns by bupaR from an eventlog converted to ativitylog (.order & activity_instance_id_by_bupar)
+# Drop the generated columns by bupaR from an eventlog converted to activitylog (.order & activity_instance_id_by_bupar)
 drop_generated_columns <- function(log) {
 
   log %>%
-    select(-.order, -activity_instance_id_by_bupar)
+    select(-.data[[".order"]], -.data[["activity_instance_id_by_bupar"]])
 }
 
 # Warning: The `eventlog` argument of `func()` is deprecated as of processcheckR 0.2.0.
