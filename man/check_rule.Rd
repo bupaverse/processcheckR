@@ -43,7 +43,7 @@ Rules can be made with the following functions:
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{check_rule(log)}: Check rule on an \code{\link[bupaR]{log}}.
+\item \code{check_rule(log)}: Check rule on a \code{\link[bupaR]{log}}.
 
 }}
 \examples{

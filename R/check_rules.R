@@ -24,7 +24,7 @@ check_rules <- function(log, ..., eventlog = deprecated()) {
   UseMethod("check_rules")
 }
 
-#' @describeIn check_rules Check rules on an \code{\link[bupaR]{log}}.
+#' @describeIn check_rules Check rules on a \code{\link[bupaR]{log}}.
 #' @export
 check_rules.log <- function(log, ..., eventlog = deprecated()) {
 
@@ -32,15 +32,26 @@ check_rules.log <- function(log, ..., eventlog = deprecated()) {
 
   rules <- list(...)
 
+  #if(any(duplicated(names(rules)))) {
+  #  warning("Some rules have duplicate labels and will be overwritten.")
+  #}
+
+  #for(i in seq_along(rules)) {
+  #   log <- check_rule(log, rules[[i]], label = names(rules)[i])
+  #}
+
+  check_rules_internal(log, rules)
+}
+
+check_rules_internal <- function(log, rules) {
+
   if(any(duplicated(names(rules)))) {
     warning("Some rules have duplicate labels and will be overwritten.")
   }
 
   for(i in seq_along(rules)) {
-     log <- check_rule(log, rules[[i]], label = names(rules)[i])
+    log <- check_rule(log, rules[[i]], label = names(rules)[i])
   }
 
   return(log)
 }
-
-

@@ -41,7 +41,7 @@ Rules can be made with the following functions:
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{check_rules(log)}: Check rules on an \code{\link[bupaR]{log}}.
+\item \code{check_rules(log)}: Check rules on a \code{\link[bupaR]{log}}.
 
 }}
 \examples{

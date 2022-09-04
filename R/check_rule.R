@@ -42,7 +42,7 @@ check_rule <- function(log, rule, label = NULL, eventlog = deprecated()) {
   UseMethod("check_rule")
 }
 
-#' @describeIn check_rule Check rule on an \code{\link[bupaR]{log}}.
+#' @describeIn check_rule Check rule on a \code{\link[bupaR]{log}}.
 #' @export
 check_rule.log <- function(log, rule, label = NULL, eventlog = deprecated()) {
 

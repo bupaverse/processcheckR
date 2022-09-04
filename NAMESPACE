@@ -2,6 +2,7 @@
 
 S3method(check_rule,log)
 S3method(check_rules,log)
+S3method(filter_rules,log)
 export(absent)
 export(and)
 export(check_rule)

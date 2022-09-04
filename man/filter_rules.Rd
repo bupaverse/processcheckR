@@ -2,38 +2,58 @@
 % Please edit documentation in R/filter_rules.R
 \name{filter_rules}
 \alias{filter_rules}
-\title{Filter using declarative rules.}
+\alias{filter_rules.log}
+\title{Filter Using Declarative Rules}
 \usage{
-filter_rules(eventlog, ...)
+filter_rules(log, ..., eventlog = deprecated())
+
+\method{filter_rules}{log}(log, ..., eventlog = deprecated())
 }
 \arguments{
-\item{eventlog}{Eventlog object}
+\item{log}{\code{\link[bupaR]{log}}: Object of class \code{\link[bupaR]{log}} or derivatives (\code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.).}
 
-\item{...}{rules}
+\item{...}{Name-rule pairs created by rule functions.}
+
+\item{eventlog}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}; please use \code{log} instead.}
 }
 \value{
-A filtered event log.
+A filtered log (of same type as input) that satisfied the specified rules.
 }
 \description{
-This function can be used to filter event data using declaritive rules. It needs an event log and a rule. Rules can be made with the following functions:
-absent(),
-and(),
-contains(),
-contains_between(),
-contains_exactly(),
-ends(),
-precedence(),
-response(),
-responded_existence(),
-starts(),
-succession(),
-xor().
+This function can be used to filter event data using declaritive rules. It needs a \code{log} (object of class
+\code{\link[bupaR]{log}} or derivatives, e.g. \code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}},
+\code{\link[bupaR]{activitylog}}, etc.). and a set of \code{rules}.
+Rules can be made with the following functions:
+\itemize{
+\item \code{\link{absent}},
+\item \code{\link{and}},
+\item \code{\link{contains}},
+\item \code{\link{contains_between}},
+\item \code{\link{contains_exactly}},
+\item \code{\link{ends}},
+\item \code{\link{precedence}},
+\item \code{\link{response}},
+\item \code{\link{responded_existence}},
+\item \code{\link{starts}},
+\item \code{\link{succession}},
+\item \code{\link{xor}}.
 }
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{filter_rules(log)}: Filter a \code{\link[bupaR]{log}} using declaritive rules.
+
+}}
 \examples{
+library(bupaR)
 library(eventdataR)
 
 # Filter where Blood test precedes MRI SCAN and Registration is the start of the case.
-filter_rules(patients, precedence("Blood test","MRI SCAN"),
-             starts("Registration"))
+patients \%>\%
+ filter_rules(precedence("Blood test","MRI SCAN"),
+              starts("Registration"))
 
+}
+\seealso{
+\code{\link{check_rules}}
 }
