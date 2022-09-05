@@ -8,6 +8,8 @@ test_that("test contains_exactly on eventlog with arg n = 1", {
   contains <- patients %>%
     check_rule(contains_exactly(activity = "check-in", n = 1))
 
+  expect_s3_class(contains, "eventlog")
+
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_exactly_check_in_1"))
 
@@ -22,6 +24,8 @@ test_that("test contains_exactly on eventlog with arg n > 1", {
 
   contains <- patients %>%
     check_rule(contains_exactly(activity = "treatment", n = 2))
+
+  expect_s3_class(contains, "eventlog")
 
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_exactly_treatment_2"))
@@ -70,6 +74,8 @@ test_that("test contains_exactly on activitylog with arg n = 1", {
   contains <- patients_act %>%
     check_rule(contains_exactly(activity = "check-in", n = 1))
 
+  expect_s3_class(contains, "activitylog")
+
   expect_equal(dim(contains), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(contains), c(colnames(patients_act), "contains_exactly_check_in_1"))
 
@@ -84,6 +90,8 @@ test_that("test contains_exactly on activitylog with arg n > 1", {
 
   contains <- patients_act %>%
     check_rule(contains_exactly(activity = "treatment", n = 2))
+
+  expect_s3_class(contains, "activitylog")
 
   expect_equal(dim(contains), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(contains), c(colnames(patients_act), "contains_exactly_treatment_2"))

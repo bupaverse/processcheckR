@@ -9,6 +9,8 @@ test_that("test and on eventlog", {
     filter(!(patient == "Jane Doe" & activity == "check-out")) %>%
     check_rule(and("check-in", "check-out"))
 
+  expect_s3_class(and, "eventlog")
+
   expect_equal(dim(and), c(nrow(patients) - 1, ncol(patients) + 1))
   expect_equal(colnames(and), c(colnames(patients), "and_check_in_check_out"))
 
@@ -50,6 +52,8 @@ test_that("test and on activitylog", {
   and <- patients_act %>%
     filter(!(patient == "Jane Doe" & activity == "check-out")) %>%
     check_rule(and("check-in", "check-out"))
+
+  expect_s3_class(and, "activitylog")
 
   expect_equal(dim(and), c(nrow(patients_act) - 1, ncol(patients_act) + 1))
   expect_equal(colnames(and), c(colnames(patients_act), "and_check_in_check_out"))

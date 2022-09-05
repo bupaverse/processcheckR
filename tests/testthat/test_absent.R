@@ -8,6 +8,8 @@ test_that("test absent on eventlog with arg n = 0", {
   absent <- patients %>%
     check_rule(absent("check-in", 0))
 
+  expect_s3_class(absent, "eventlog")
+
   expect_equal(dim(absent), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(absent), c(colnames(patients), "absent_check_in_0"))
 
@@ -22,6 +24,8 @@ test_that("test absent on eventlog with arg n > 1", {
 
   absent <- patients %>%
     check_rule(absent(activity = "surgery", n = 2))
+
+  expect_s3_class(absent, "eventlog")
 
   expect_equal(dim(absent), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(absent), c(colnames(patients), "absent_surgery_2"))
@@ -61,6 +65,8 @@ test_that("test absent on activitylog with arg n = 0", {
   absent <- patients_act %>%
     check_rule(absent("check-in", 0))
 
+  expect_s3_class(absent, "activitylog")
+
   expect_equal(dim(absent), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(absent), c(colnames(patients_act), "absent_check_in_0"))
 
@@ -75,6 +81,8 @@ test_that("test absent on activitylog with arg n > 2", {
 
   absent <- patients_act %>%
     check_rule(absent(activity = "surgery", n = 2))
+
+  expect_s3_class(absent, "activitylog")
 
   expect_equal(dim(absent), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(absent), c(colnames(patients_act), "absent_surgery_2"))

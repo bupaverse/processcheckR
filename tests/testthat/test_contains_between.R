@@ -8,6 +8,8 @@ test_that("test contains_between on eventlog with args min = 1, max = 1", {
   contains <- patients %>%
     check_rule(contains_between(activity = "check-in", min = 1, max = 1))
 
+  expect_s3_class(contains, "eventlog")
+
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_between_check_in_1_1"))
 
@@ -22,6 +24,8 @@ test_that("test contains on eventlog with args min > 1, max > 1", {
 
   contains <- patients %>%
     check_rule(contains_between(activity = "surgery", min = 2, max = 3))
+
+  expect_s3_class(contains, "eventlog")
 
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_between_surgery_2_3"))
@@ -38,6 +42,8 @@ test_that("test contains on eventlog with args min = 0, max = 1", {
   contains <- patients %>%
     check_rule(contains_between(activity = "check-in", min = 0, max = 1))
 
+  expect_s3_class(contains, "eventlog")
+
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_between_check_in_0_1"))
 
@@ -51,6 +57,8 @@ test_that("test contains on eventlog with args min = 0, max = 0", {
 
   contains <- patients %>%
     check_rule(contains_between(activity = "check-in", min = 0, max = 0))
+
+  expect_s3_class(contains, "eventlog")
 
   expect_equal(dim(contains), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(contains), c(colnames(patients), "contains_between_check_in_0_0"))
@@ -100,6 +108,8 @@ test_that("test contains_between on activitylog with args min = 1, max = 1", {
   contains <- patients_act %>%
     check_rule(contains_between(activity = "check-in", min = 1, max = 1))
 
+  expect_s3_class(contains, "activitylog")
+
   expect_equal(dim(contains), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(contains), c(colnames(patients_act), "contains_between_check_in_1_1"))
 
@@ -114,6 +124,8 @@ test_that("test contains on activitylog with args min > 1, max > 1", {
 
   contains <- patients_act %>%
     check_rule(contains_between(activity = "surgery", min = 2, max = 3))
+
+  expect_s3_class(contains, "activitylog")
 
   expect_equal(dim(contains), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_equal(colnames(contains), c(colnames(patients_act), "contains_between_surgery_2_3"))

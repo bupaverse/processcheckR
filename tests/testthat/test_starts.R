@@ -8,6 +8,8 @@ test_that("test starts on eventlog", {
   starts <- patients %>%
     check_rule(starts("check-in"))
 
+  expect_s3_class(starts, "eventlog")
+
   expect_equal(dim(starts), c(nrow(patients), ncol(patients) + 1))
   expect_equal(colnames(starts), c(colnames(patients), "starts_with_check_in"))
 
@@ -35,6 +37,8 @@ test_that("test starts on grouped_eventlog", {
   starts <- patients_grouped %>%
     check_rule(starts("check-in"))
 
+  expect_s3_class(starts, "grouped_eventlog")
+
   expect_equal(dim(starts), c(nrow(patients_grouped), ncol(patients_grouped) + 1))
   expect_equal(colnames(starts), c(colnames(patients_grouped), "starts_with_check_in"))
 
@@ -53,6 +57,8 @@ test_that("test starts on activitylog", {
   starts <- patients_act %>%
     check_rule(starts("check-in"))
 
+  expect_s3_class(starts, "activitylog")
+
   expect_equal(dim(starts), c(nrow(patients_act), ncol(patients_act) + 1))
   expect_true(compare::compareIgnoreOrder(colnames(starts), c(colnames(patients_act), "starts_with_check_in"))$result)
 
@@ -69,6 +75,8 @@ test_that("test starts on grouped_activitylog", {
 
   starts <- patients_act_grouped %>%
     check_rule(starts("check-in"))
+
+  expect_s3_class(starts, "grouped_activitylog")
 
   expect_equal(dim(starts), c(nrow(patients_act_grouped), ncol(patients_act_grouped) + 1))
   expect_true(compare::compareIgnoreOrder(colnames(starts), c(colnames(patients_act_grouped), "starts_with_check_in"))$result)
