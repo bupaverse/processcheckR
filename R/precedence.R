@@ -4,8 +4,7 @@
 #'
 #' If `activity_b` occured, it should be preceded by `activity_a` in the same case.
 #'
-#' @param activity_a \code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.
-#' @param activity_b \code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.
+#' @inherit and params
 #'
 #' @family Declarative Rules
 #'
