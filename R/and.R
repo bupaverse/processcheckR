@@ -30,9 +30,9 @@ and <- function(activity_a, activity_b) {
   attr(rule, "type") <- "and"
   attr(rule, "checker") <- and_checker
   attr(rule, "label") <- paste0("and_",
-                                str_replace(activity_a, "-| ", "_"),
-                                "_",
-                                str_replace(activity_b, "-| ", "_"))
+                                       str_replace(activity_a, "-| ", "_"),
+                                       "_",
+                                       str_replace(activity_b, "-| ", "_"))
 
   return(rule)
 }

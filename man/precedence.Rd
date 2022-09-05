@@ -2,30 +2,33 @@
 % Please edit documentation in R/precedence.R
 \name{precedence}
 \alias{precedence}
-\title{Check for precedence between two activities.}
+\title{Precedence}
 \usage{
 precedence(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity B occured, it should be preceded by activity A in the same case.
+Check for precedence between two activities.
+
+If \code{activity_b} occured, it should be preceded by \code{activity_a} in the same case.
 }
 \examples{
 library(bupaR)
 library(eventdataR)
 
-
 # A MRI Scan should be preceeded by a Blood test.
 
 patients \%>\%
-check_rule(precedence("Blood test","MRI SCAN"))
+ check_rule(precedence("Blood test","MRI SCAN"))
 
 }
 \seealso{
+\code{\link[edeaR]{filter_precedence}},\code{\link{responded_existence}},\code{\link{response}},\code{\link{succession}}
+
 Other Declarative Rules: 
 \code{\link{absent}()},
 \code{\link{and}()},

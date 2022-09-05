@@ -14,14 +14,13 @@ test_that("test and on eventlog", {
   expect_equal(dim(and), c(nrow(patients) - 1, ncol(patients) + 1))
   expect_equal(colnames(and), c(colnames(patients), "and_check_in_check_out"))
 
-  # Jane Doe lacks "check-out", George Doe lacks both "check-in" and "check-out".
+  # Jane Doe lacks "check-out".
+  # George Doe lacks both "check-in" and "check-out", so rule is satisfied.
   expect_true(all(and[and$patient != "Jane Doe",]$and_check_in_check_out))
   expect_false(any(and[and$patient == "Jane Doe",]$and_check_in_check_out))
 })
 
 test_that("test and on eventlog fails on non-existing activity", {
-
-  load("./testdata/patients.rda")
 
   load("./testdata/patients.rda")
 
