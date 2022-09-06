@@ -36,9 +36,21 @@ test_that("test precedence on eventlog fails on non-existing activity", {
 
 test_that("test precedence on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
+  pre <- patients_grouped_resource %>%
+    check_rule(precedence(activity_a = "treatment", activity_b = "surgery"))
+
+  expect_s3_class(pre, "grouped_eventlog")
+
+  expect_equal(dim(pre), c(nrow(patients_grouped_resource), ncol(patients_grouped_resource) + 1))
+  expect_equal(colnames(pre), c(colnames(patients_grouped_resource), "precedence_treatment_surgery"))
+  expect_equal(groups(pre), groups(patients_grouped_resource))
+
+  # Jane Doe's "surgery" was not preceded by "treatment".
+  # George Doe lacks both "surgery", so rule is satisfied.
+  expect_true(all(pre[pre$patient != "Jane Doe",]$precedence_treatment_surgery))
+  expect_false(any(pre[pre$patient == "Jane Doe",]$precedence_treatment_surgery))
 })
 
 
@@ -64,7 +76,19 @@ test_that("test precedence on activitylog", {
 
 test_that("test precedence on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
+  pre <- patients_act_grouped_resource %>%
+    check_rule(precedence(activity_a = "treatment", activity_b = "surgery"))
+
+  expect_s3_class(pre, "grouped_activitylog")
+
+  expect_equal(dim(pre), c(nrow(patients_act_grouped_resource), ncol(patients_act_grouped_resource) + 1))
+  expect_equal(colnames(pre), c(colnames(patients_act_grouped_resource), "precedence_treatment_surgery"))
+  expect_equal(groups(pre), groups(patients_act_grouped_resource))
+
+  # Jane Doe's "surgery" was not preceded by "treatment".
+  # George Doe lacks both "surgery", so rule is satisfied.
+  expect_true(all(pre[pre$patient != "Jane Doe",]$precedence_treatment_surgery))
+  expect_false(any(pre[pre$patient == "Jane Doe",]$precedence_treatment_surgery))
 })

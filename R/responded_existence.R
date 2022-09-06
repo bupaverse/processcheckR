@@ -53,3 +53,8 @@ responded_existence_checker.log <- function(log, rule) {
                         !any(.data[[activity_id(log)]] == rule$activity_a)) %>%
     ungroup_eventlog()
 }
+
+responded_existence_checker.grouped_log <- function(log, rule) {
+
+  bupaR:::apply_grouped_fun(log, responded_existence_checker.log, rule, .ignore_groups = TRUE, .keep_groups = TRUE, .returns_log = TRUE)
+}

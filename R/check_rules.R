@@ -1,5 +1,7 @@
 #' @title Check Multiple Declarative Rules
 #'
+#' @details When `check_rules` is applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
+#'
 #' @return
 #' An annotated log (of same type as input), where – for every rule – a new column indicates whether the rule holds or not.
 #' The name of each rule becomes the name of the column.

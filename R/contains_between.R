@@ -66,3 +66,8 @@ contains_between_checker.log <- function(log, rule) {
   log %>%
     mutate(rule_holds = .data[[case_id(log)]] %in% holds)
 }
+
+contains_between_checker.grouped_log <- function(log, rule) {
+
+  bupaR:::apply_grouped_fun(log, contains_between_checker.log, rule, .ignore_groups = TRUE, .keep_groups = TRUE, .returns_log = TRUE)
+}

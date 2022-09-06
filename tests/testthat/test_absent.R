@@ -47,12 +47,20 @@ test_that("test absent on eventlog fails on non-existing activity", {
 
 test_that("test absent on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
+  absent <- patients_grouped_resource %>%
+    check_rule(absent(activity = "check-in", n = 0))
 
-  absent <- patients_grouped %>%
-    check_rule(absent("check-in"))
+  expect_s3_class(absent, "grouped_eventlog")
+
+  expect_equal(dim(absent), c(nrow(patients_grouped_resource), ncol(patients_grouped_resource) + 1))
+  expect_equal(colnames(absent), c(colnames(patients_grouped_resource), "absent_check_in_0"))
+  expect_equal(groups(absent), groups(patients_grouped_resource))
+
+  # Only George Doe absents "check-in".
+  expect_true(all(absent[absent$patient != "George Doe",]$absent_check_in_0))
+  expect_equal(absent[absent$patient == "George Doe",]$absent_check_in_0, FALSE)
 })
 
 
@@ -75,7 +83,7 @@ test_that("test absent on activitylog with arg n = 0", {
   expect_equal(absent[absent$patient == "George Doe",]$absent_check_in_0, FALSE)
 })
 
-test_that("test absent on activitylog with arg n > 2", {
+test_that("test absent on activitylog with arg n > 1", {
 
   load("./testdata/patients_act.rda")
 
@@ -94,10 +102,18 @@ test_that("test absent on activitylog with arg n > 2", {
 
 test_that("test absent on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
+  absent <- patients_act_grouped_resource %>%
+    check_rule(absent(activity = "check-in", n = 0))
 
-  absent <- patients_act_grouped %>%
-    check_rule(absent("check-in"))
+  expect_s3_class(absent, "grouped_activitylog")
+
+  expect_equal(dim(absent), c(nrow(patients_act_grouped_resource), ncol(patients_act_grouped_resource) + 1))
+  expect_equal(colnames(absent), c(colnames(patients_act_grouped_resource), "absent_check_in_0"))
+  expect_equal(groups(absent), groups(patients_act_grouped_resource))
+
+  # Only George Doe absents "check-in".
+  expect_true(all(absent[absent$patient != "George Doe",]$absent_check_in_0))
+  expect_equal(absent[absent$patient == "George Doe",]$absent_check_in_0, FALSE)
 })

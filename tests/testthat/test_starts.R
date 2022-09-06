@@ -30,17 +30,16 @@ test_that("test starts on eventlog fails on non-existing activity", {
 
 test_that("test starts on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
-
-  starts <- patients_grouped %>%
+  starts <- patients_grouped_resource %>%
     check_rule(starts("check-in"))
 
   expect_s3_class(starts, "grouped_eventlog")
 
-  expect_equal(dim(starts), c(nrow(patients_grouped), ncol(patients_grouped) + 1))
-  expect_equal(colnames(starts), c(colnames(patients_grouped), "starts_with_check_in"))
+  expect_equal(dim(starts), c(nrow(patients_grouped_resource), ncol(patients_grouped_resource) + 1))
+  expect_equal(colnames(starts), c(colnames(patients_grouped_resource), "starts_with_check_in"))
+  expect_equal(groups(starts), groups(patients_grouped_resource))
 
   # Only George Doe doesn't start with "check-in".
   expect_true(all(starts[starts$patient != "George Doe",]$starts_with_check_in))
@@ -69,17 +68,16 @@ test_that("test starts on activitylog", {
 
 test_that("test starts on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
-
-  starts <- patients_act_grouped %>%
+  starts <- patients_act_grouped_resource %>%
     check_rule(starts("check-in"))
 
   expect_s3_class(starts, "grouped_activitylog")
 
-  expect_equal(dim(starts), c(nrow(patients_act_grouped), ncol(patients_act_grouped) + 1))
-  expect_true(compare::compareIgnoreOrder(colnames(starts), c(colnames(patients_act_grouped), "starts_with_check_in"))$result)
+  expect_equal(dim(starts), c(nrow(patients_act_grouped_resource), ncol(patients_act_grouped_resource) + 1))
+  expect_true(compare::compareIgnoreOrder(colnames(starts), c(colnames(patients_act_grouped_resource), "starts_with_check_in"))$result)
+  expect_equal(groups(starts), groups(patients_act_grouped_resource))
 
   # Only George Doe doesn't start with "check-in".
   expect_true(all(starts[starts$patient != "George Doe",]$starts_with_check_in))

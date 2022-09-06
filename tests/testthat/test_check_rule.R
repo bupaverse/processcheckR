@@ -37,10 +37,20 @@ test_that("test check_rule on eventlog with arg label", {
 
 test_that("test check_rule on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
+  check <- patients_grouped_resource %>%
+    check_rule(starts(activity = "check-in"))
 
+  expect_s3_class(check, "grouped_eventlog")
+
+  expect_equal(dim(check), c(nrow(patients_grouped_resource), ncol(patients_grouped_resource) + 1))
+  expect_equal(colnames(check), c(colnames(patients_grouped_resource), "starts_with_check_in"))
+  expect_equal(groups(check), groups(patients_grouped_resource))
+
+  # Only George Doe doesn't start with "check-in".
+  expect_true(all(check[check$patient != "George Doe",]$starts_with_check_in))
+  expect_equal(check[check$patient == "George Doe",]$starts_with_check_in, FALSE)
 })
 
 
@@ -65,8 +75,18 @@ test_that("test check_rule on activitylog", {
 
 test_that("test check_rule on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
+  check <- patients_act_grouped_resource %>%
+    check_rule(starts(activity = "check-in"))
 
+  expect_s3_class(check, "grouped_activitylog")
+
+  expect_equal(dim(check), c(nrow(patients_act_grouped_resource), ncol(patients_act_grouped_resource) + 1))
+  expect_true(compare::compareIgnoreOrder(colnames(check), c(colnames(patients_act_grouped_resource), "starts_with_check_in"))$result)
+  expect_equal(groups(check), groups(patients_act_grouped_resource))
+
+  # Only George Doe doesn't start with "check-in".
+  expect_true(all(check[check$patient != "George Doe",]$starts_with_check_in))
+  expect_equal(check[check$patient == "George Doe",]$starts_with_check_in, FALSE)
 })

@@ -41,6 +41,9 @@ Rules can be made with the following functions:
 \item \code{\link{xor}}.
 }
 }
+\details{
+When \code{check_rule} is applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
+}
 \section{Methods (by class)}{
 \itemize{
 \item \code{check_rule(log)}: Check rule on a \code{\link[bupaR]{log}}.

@@ -42,9 +42,19 @@ starts_checker.eventlog <- function(log, rule) {
     ungroup_eventlog()
 }
 
+starts_checker.grouped_eventlog <- function(log, rule) {
+
+  bupaR:::apply_grouped_fun(log, starts_checker.eventlog, rule, .ignore_groups = TRUE, .keep_groups = TRUE, .returns_log = TRUE)
+}
+
 starts_checker.activitylog <- function(log, rule) {
 
   starts_checker.eventlog(bupaR::to_eventlog(log), rule) %>%
     bupaR::to_activitylog() %>%
     drop_generated_columns()
+}
+
+starts_checker.grouped_activitylog <- function(log, rule) {
+
+  bupaR:::apply_grouped_fun(log, starts_checker.activitylog, rule, .ignore_groups = TRUE, .keep_groups = TRUE, .returns_log = TRUE)
 }

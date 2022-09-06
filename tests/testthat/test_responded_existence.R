@@ -55,9 +55,22 @@ test_that("test responded_existance on eventlog fails on non-existing activity",
 
 test_that("test responded_existence on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
+  res <- patients_grouped_resource %>%
+    filter(!(patient == "Jane Doe" & activity == "check-out")) %>%
+    check_rule(responded_existence(activity_a = "check-in", activity_b = "check-out"))
+
+  expect_s3_class(res, "grouped_eventlog")
+
+  expect_equal(dim(res), c(nrow(patients_grouped_resource) - 1, ncol(patients_grouped_resource) + 1))
+  expect_true(compare::compareIgnoreOrder(colnames(res), c(colnames(patients_grouped_resource), "responded_existence_check_in_check_out"))$result)
+  expect_equal(groups(res), groups(patients_grouped_resource))
+
+  # Jane Doe lacks "check-out".
+  # George Doe lacks both "check-in" and "check-out", so rule is satisfied.
+  expect_true(all(res[res$patient != "Jane Doe",]$responded_existence_check_in_check_out))
+  expect_false(any(res[res$patient == "Jane Doe",]$responded_existence_check_in_check_out))
 })
 
 
@@ -84,7 +97,20 @@ test_that("test responded_existence on activitylog", {
 
 test_that("test responded_existence on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
+  res <- patients_act_grouped_resource %>%
+    filter(!(patient == "Jane Doe" & activity == "check-out")) %>%
+    check_rule(responded_existence(activity_a = "check-in", activity_b = "check-out"))
+
+  expect_s3_class(res, "grouped_activitylog")
+
+  expect_equal(dim(res), c(nrow(patients_act_grouped_resource) - 1, ncol(patients_act_grouped_resource) + 1))
+  expect_true(compare::compareIgnoreOrder(colnames(res), c(colnames(patients_act_grouped_resource), "responded_existence_check_in_check_out"))$result)
+  expect_equal(groups(res), groups(patients_act_grouped_resource))
+
+  # Jane Doe lacks "check-out".
+  # George Doe lacks both "check-in" and "check-out", so rule is satisfied.
+  expect_true(all(res[res$patient != "Jane Doe",]$responded_existence_check_in_check_out))
+  expect_false(any(res[res$patient == "Jane Doe",]$responded_existence_check_in_check_out))
 })

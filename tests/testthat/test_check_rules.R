@@ -40,10 +40,25 @@ test_that("test check_rules on eventlog with 1 rules", {
 
 test_that("test check_rules on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  skip("fails")
 
-  load("./testdata/patients_grouped.rda")
+  load("./testdata/patients_grouped_resource.rda")
 
+  check <- patients_grouped_resource %>%
+    check_rules(start = starts(activity = "check-in"),
+                end = ends(activity = "check-out"))
+
+  expect_s3_class(check, "grouped_eventlog")
+
+  expect_equal(dim(check), c(nrow(patients_grouped_resource), ncol(patients_grouped_resource) + 2))
+  expect_equal(colnames(check), c(colnames(patients_grouped_resource), "start", "end"))
+  expect_equal(groups(check), groups(patients_grouped_resource))
+
+  # Only George Doe doesn't start with "check-in" and end with "check-out".
+  expect_true(all(check[check$patient != "George Doe",]$start))
+  expect_true(all(check[check$patient != "George Doe",]$end))
+  expect_equal(check[check$patient == "George Doe",]$start, FALSE)
+  expect_equal(check[check$patient == "George Doe",]$end, FALSE)
 })
 
 
@@ -71,8 +86,23 @@ test_that("test check_rules on activitylog with multiple rules", {
 
 test_that("test check_rules on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  skip("fails")
 
-  load("./testdata/patients_act_grouped.rda")
+  load("./testdata/patients_act_grouped_resource.rda")
 
+  check <- patients_act_grouped_resource %>%
+    check_rules(start_check_in = starts(activity = "check-in"),
+                end_check_out = ends(activity = "check-out"))
+
+  expect_s3_class(check, "grouped_activitylog")
+
+  expect_equal(dim(check), c(nrow(patients_act_grouped_resource), ncol(patients_act_grouped_resource) + 2))
+  expect_true(compare::compareIgnoreOrder(colnames(check), c(colnames(patients_act_grouped_resource), "start_check_in", "end_check_out"))$result)
+  expect_equal(groups(check), groups(patients_act_grouped_resource))
+
+  # Only George Doe doesn't start with "check-in" and end with "check-out".
+  expect_true(all(check[check$patient != "George Doe",]$start_check_in))
+  expect_true(all(check[check$patient != "George Doe",]$end_check_out))
+  expect_equal(check[check$patient == "George Doe",]$start_check_in, FALSE)
+  expect_equal(check[check$patient == "George Doe",]$end_check_out, FALSE)
 })

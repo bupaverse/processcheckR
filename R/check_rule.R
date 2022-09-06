@@ -18,6 +18,8 @@
 #' \item \code{\link{xor}}.
 #' }
 #'
+#' @details When `check_rule` is applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
+#'
 #' @return
 #' An annotated log (of same type as input), where a new column indicates whether the rule holds or not.
 #' The name of the new column can optionally be set using the `label` argument.
@@ -59,5 +61,3 @@ check_rule.log <- function(log, rule, label = NULL, eventlog = deprecated()) {
     mutate(!!sym(label) := rule_holds) %>%
     select(-rule_holds)
 }
-
-
