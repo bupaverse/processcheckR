@@ -20,6 +20,23 @@ test_that("test responded_existence on eventlog", {
   expect_false(any(res[res$patient == "Jane Doe",]$responded_existence_check_in_check_out))
 })
 
+test_that("test responded_existence on eventlog", {
+
+  load("./testdata/patients.rda")
+
+  res <- patients %>%
+    check_rule(responded_existence(activity_a = "treatment", activity_b = "surgery"))
+
+  expect_s3_class(res, "eventlog")
+
+  expect_equal(dim(res), c(nrow(patients), ncol(patients) + 1))
+  expect_equal(colnames(res), c(colnames(patients), "responded_existence_treatment_surgery"))
+
+  # If "treatment" occurs, "surgery" should also occur (before or after) => John and Jane Doe satisfy this rule.
+  # George Doe lacks both "check-in" and "check-out", so rule is satisfied.
+  expect_true(all(res$responded_existence_treatment_surgery))
+})
+
 test_that("test responded_existence on eventlog when activity_a is not present", {
 
   load("./testdata/patients.rda")

@@ -2,17 +2,19 @@
 % Please edit documentation in R/response.R
 \name{response}
 \alias{response}
-\title{Check for response between two activities}
+\title{Response}
 \usage{
 response(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity A is executed, it should be eventually followed by activity B.
+Check for response between two activities.
+
+If \code{activity_a} is executed, it should be (eventually) followed by \code{activity_b}.
 }
 \examples{
 library(bupaR)
@@ -21,10 +23,12 @@ library(eventdataR)
 # A blood test should eventually be followed by Discuss Results
 
 patients \%>\%
-check_rule(response("Blood test","Discuss Results"))
+ check_rule(response("Blood test","Discuss Results"))
 
 }
 \seealso{
+\code{\link{precedence}},\code{\link{responded_existence}},\code{\link{succession}}
+
 Other Declarative Rules: 
 \code{\link{absent}()},
 \code{\link{and}()},
