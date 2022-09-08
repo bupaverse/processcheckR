@@ -14,8 +14,7 @@
 #' library(bupaR)
 #' library(eventdataR)
 #'
-#' # A blood test should eventually be followed by Discuss Results
-#'
+#' # A blood test should eventually be followed by Discuss Results.
 #' patients %>%
 #'  check_rule(response("Blood test","Discuss Results"))
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/and.R
 \name{and}
 \alias{and}
-\title{And}
+\title{AND}
 \usage{
 and(activity_a, activity_b)
 }

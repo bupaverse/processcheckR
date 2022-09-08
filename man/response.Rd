@@ -20,8 +20,7 @@ If \code{activity_a} is executed, it should be (eventually) followed by \code{ac
 library(bupaR)
 library(eventdataR)
 
-# A blood test should eventually be followed by Discuss Results
-
+# A blood test should eventually be followed by Discuss Results.
 patients \%>\%
  check_rule(response("Blood test","Discuss Results"))
 

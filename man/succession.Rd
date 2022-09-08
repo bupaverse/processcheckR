@@ -2,18 +2,20 @@
 % Please edit documentation in R/succession.R
 \name{succession}
 \alias{succession}
-\title{Check succession between two activities}
+\title{Succession}
 \usage{
 succession(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  \code{check_rule}.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity A happens, it should be eventually followed by activity B.
-If activity B happens, it should be preceded by activity A.
+Check succession between two activities.
+
+If \code{activity_a} happens, it should be eventually followed by \code{activity_b}.
+If \code{activity_b} happens, it should be preceded by \code{activity_a}.
 }
 \examples{
 library(bupaR)
@@ -22,10 +24,12 @@ library(eventdataR)
 # Blood test should always happen before a MRI Scan,
 # and both should happen when one of them happens.
 patients \%>\%
-check_rule(succession("Blood test","MRI SCAN"))
+ check_rule(succession("Blood test","MRI SCAN"))
 
 }
 \seealso{
+\code{\link{precedence}},\code{\link{responded_existence}},\code{\link{response}}
+
 Other Declarative Rules: 
 \code{\link{absent}()},
 \code{\link{and}()},

@@ -1,4 +1,4 @@
-#' @title And
+#' @title AND
 #'
 #' @description Check for co-existence of two activities.
 #'

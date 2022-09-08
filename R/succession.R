@@ -1,12 +1,16 @@
-#' Check succession between two activities
+#' @title Succession
 #'
-#' If activity A happens, it should be eventually followed by activity B.
-#' If activity B happens, it should be preceded by activity A.
+#' @description Check succession between two activities.
 #'
-#' @param activity_a Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.
-#' @param activity_b Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.
+#' If `activity_a` happens, it should be eventually followed by `activity_b`.
+#' If `activity_b` happens, it should be preceded by `activity_a`.
+#'
+#' @inherit and params
+#'
 #' @family Declarative Rules
-
+#'
+#' @seealso \code{\link{precedence}},\code{\link{responded_existence}},\code{\link{response}}
+#'
 #' @examples
 #' library(bupaR)
 #' library(eventdataR)
@@ -14,11 +18,11 @@
 #' # Blood test should always happen before a MRI Scan,
 #' # and both should happen when one of them happens.
 #' patients %>%
-#' check_rule(succession("Blood test","MRI SCAN"))
+#'  check_rule(succession("Blood test","MRI SCAN"))
 #'
 #' @export
-#'
 succession <- function(activity_a, activity_b) {
+
   rule <- list()
   rule$activity_a <- activity_a
   rule$activity_b <- activity_b
@@ -57,4 +61,32 @@ succession <- function(activity_a, activity_b) {
                                 "_",
                                 str_replace(activity_b, "-| ", "_"))
   return(rule)
+}
+
+succession_checker <- function(log, rule) {
+  UseMethod("succession_checker")
+}
+
+succession_checker.log <- function(log, rule) {
+
+  check_activity_in_log(rule$activity_a, log)
+  check_activity_in_log(rule$activity_b, log)
+
+  log %>%
+    filter_precedence(antecedents = rule$activity_a,
+                      consequents = rule$activity_b,
+                      precedence_type = "eventually_follows") %>%
+    case_labels() -> holds
+
+  log %>%
+    group_by_case() %>%
+    mutate(rule_holds = (.data[[case_id(log)]] %in% holds) |
+                        (!(any(.data[[activity_id(log)]] == rule$activity_b)) &
+                         !(any(.data[[activity_id(log)]] == rule$activity_a)))) %>%
+    ungroup_eventlog()
+}
+
+succession_checker.grouped_log <- function(log, rule) {
+
+  bupaR:::apply_grouped_fun(log, succession_checker.log, rule, .ignore_groups = TRUE, .keep_groups = TRUE, .returns_log = TRUE)
 }
