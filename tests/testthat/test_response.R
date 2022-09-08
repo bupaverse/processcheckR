@@ -1,7 +1,7 @@
 
 #### eventlog ####
 
-test_that("test response on eventlog", {
+test_that("test response on eventlog treatment -> surgery", {
 
   load("./testdata/patients.rda")
 
@@ -17,6 +17,24 @@ test_that("test response on eventlog", {
   # George Doe lacks both "treatment" and "surgery", so rule is satisfied.
   expect_true(all(res[res$patient != "Jane Doe",]$response_treatment_surgery))
   expect_false(any(res[res$patient == "Jane Doe",]$response_treatment_surgery))
+})
+
+test_that("test response on eventlog surgery -> treatment", {
+
+  load("./testdata/patients.rda")
+
+  res <- patients %>%
+    check_rule(response(activity_a = "surgery", activity_b = "treatment"))
+
+  expect_s3_class(res, "eventlog")
+
+  expect_equal(dim(res), c(nrow(patients), ncol(patients) + 1))
+  expect_equal(colnames(res), c(colnames(patients), "response_surgery_treatment"))
+
+  # John Doe's 2nd "surgery" is not (eventually) followed by "treatment".
+  # George Doe lacks both "treatment" and "surgery", so rule is satisfied.
+  expect_true(all(res[res$patient != "John Doe",]$response_surgery_treatment))
+  expect_false(any(res[res$patient == "John Doe",]$response_surgery_treatment))
 })
 
 test_that("test response on eventlog when activity_a is not present", {

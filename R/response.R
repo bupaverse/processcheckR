@@ -44,11 +44,25 @@ response_checker.log <- function(log, rule) {
   check_activity_in_log(rule$activity_a, log)
   check_activity_in_log(rule$activity_b, log)
 
+  # log %>%
+  #  filter_precedence(antecedents = rule$activity_a,
+  #                    consequents = rule$activity_b,
+  #                    precedence_type = "eventually_follows") %>%
+  #  case_labels() -> holds
+
+  sequence <- paste(rule$activity_a, rule$activity_b, sep = ",")
+
   log %>%
-    filter_precedence(antecedents = rule$activity_a,
-                      consequents = rule$activity_b,
-                      precedence_type = "eventually_follows") %>%
-    case_labels() -> holds
+    filter_activity(activities = c(rule$activity_a, rule$activity_b)) %>%
+    case_list(.keep_trace_list = TRUE) %>%
+    rowwise() %>%
+    mutate(trace = list(str_flatten(trace_list[trace_list != c(trace_list[-1], FALSE)], ","))) %>%
+    ungroup() %>%
+    mutate(sequence_count = str_count(trace, sequence),
+           activity_a_count = str_count(trace, rule$activity_a),
+           holds = if_else(sequence_count == activity_a_count, TRUE, FALSE)) %>%
+    filter(holds) %>%
+    pull(case_id(log)) -> holds
 
   log %>%
     group_by_case() %>%
