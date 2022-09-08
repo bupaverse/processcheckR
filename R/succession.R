@@ -1,13 +1,13 @@
 #' @title Succession
 #'
-#' @description Check succession between two activities.
+#' @description Check for succession between two activities.
 #'
 #' If `activity_a` happens, it should be eventually followed by `activity_b`.
 #' If `activity_b` happens, it should be preceded by `activity_a`.
 #'
 #' @inherit and params
 #'
-#' @family Declarative Rules
+#' @family Relation rules
 #'
 #' @seealso \code{\link{precedence}},\code{\link{responded_existence}},\code{\link{response}}
 #'

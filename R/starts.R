@@ -4,7 +4,7 @@
 #'
 #' @param activity \code{\link{character}}: The start activity. This should be an activity of the log supplied to \code{\link{check_rule}}.
 #'
-#' @family Declarative Rules
+#' @family Existence rules
 #'
 #' @examples
 #' library(bupaR)

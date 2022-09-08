@@ -34,17 +34,11 @@ patients \%>\%
 \seealso{
 \code{\link{absent}},\code{\link{contains_between}},\code{\link{contains_exactly}}
 
-Other Declarative Rules: 
+Other Existence rules: 
 \code{\link{absent}()},
-\code{\link{and}()},
 \code{\link{contains_between}()},
 \code{\link{contains_exactly}()},
 \code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{starts}()}
 }
-\concept{Declarative Rules}
+\concept{Existence rules}

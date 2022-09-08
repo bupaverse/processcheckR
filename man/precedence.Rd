@@ -29,17 +29,11 @@ patients \%>\%
 \seealso{
 \code{\link[edeaR]{filter_precedence}},\code{\link{responded_existence}},\code{\link{response}},\code{\link{succession}}
 
-Other Declarative Rules: 
-\code{\link{absent}()},
+Other Relation rules: 
 \code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{starts}()},
 \code{\link{succession}()},
 \code{\link{xor}()}
 }
-\concept{Declarative Rules}
+\concept{Relation rules}

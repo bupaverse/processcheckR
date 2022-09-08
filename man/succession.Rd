@@ -12,7 +12,7 @@ succession(activity_a, activity_b)
 \item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-Check succession between two activities.
+Check for succession between two activities.
 
 If \code{activity_a} happens, it should be eventually followed by \code{activity_b}.
 If \code{activity_b} happens, it should be preceded by \code{activity_a}.
@@ -30,17 +30,11 @@ patients \%>\%
 \seealso{
 \code{\link{precedence}},\code{\link{responded_existence}},\code{\link{response}}
 
-Other Declarative Rules: 
-\code{\link{absent}()},
+Other Relation rules: 
 \code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
 \code{\link{precedence}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{starts}()},
 \code{\link{xor}()}
 }
-\concept{Declarative Rules}
+\concept{Relation rules}

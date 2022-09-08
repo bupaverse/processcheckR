@@ -8,6 +8,10 @@
 #' @param activity_a \code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.
 #' @param activity_b \code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.
 #'
+#' @family Relation rules
+#'
+#' @seealso \code{\link{xor}}
+#'
 #' @examples
 #' library(bupaR)
 #' library(eventdataR)
@@ -15,10 +19,6 @@
 #' # Check that if a patients is registered, he's also checked-out, and vice versa.
 #' patients %>%
 #'  check_rule(and("Registration","Check-out"))
-#'
-#' @family Declarative Rules
-#'
-#' @seealso \code{\link{xor}}
 #'
 #' @export
 and <- function(activity_a, activity_b) {

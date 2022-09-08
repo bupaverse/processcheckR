@@ -30,17 +30,11 @@ patients \%>\%
 \seealso{
 \code{\link{precedence}},\code{\link{response}},\code{\link{succession}}
 
-Other Declarative Rules: 
-\code{\link{absent}()},
+Other Relation rules: 
 \code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
 \code{\link{precedence}()},
 \code{\link{response}()},
-\code{\link{starts}()},
 \code{\link{succession}()},
 \code{\link{xor}()}
 }
-\concept{Declarative Rules}
+\concept{Relation rules}

@@ -1,32 +1,11 @@
-#' @title Check Multiple Declarative Rules
-#'
-#' @details When `check_rules` is applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
-#'
-#' @return
-#' An annotated log (of same type as input), where – for every rule – a new column indicates whether the rule holds or not.
-#' The name of each rule becomes the name of the column.
-#'
-#' @param ... Name-rule pairs created by rule functions.
-#'
-#' @inherit check_rule params description
-#'
-#' @seealso \code{\link{check_rule}}
-#'
-#' @examples
-#' library(bupaR)
-#' library(eventdataR)
-#'
-#' # Check whether MRI Scan is preceded by Blood test, and the case starts with Registration.
-#' patients %>%
-#'  check_rules(rule1 = precedence("Blood test","MRI SCAN"),
-#'              rule2 = starts("Registration"))
-#'
+
 #' @export check_rules
+#' @rdname check_rule
 check_rules <- function(log, ..., eventlog = deprecated()) {
   UseMethod("check_rules")
 }
 
-#' @describeIn check_rules Check rules on a \code{\link[bupaR]{log}}.
+#' @describeIn check_rule Check rules on a \code{\link[bupaR]{log}}.
 #' @export
 check_rules.log <- function(log, ..., eventlog = deprecated()) {
 

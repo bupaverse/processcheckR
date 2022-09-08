@@ -6,7 +6,7 @@
 #'
 #' @inherit and params
 #'
-#' @family Declarative Rules
+#' @family Relation rules
 #'
 #' @seealso \code{\link{precedence}},\code{\link{response}},\code{\link{succession}}
 #'

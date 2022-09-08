@@ -20,23 +20,37 @@ filter_rules(log, ..., eventlog = deprecated())
 A filtered log (of same type as input) that satisfied the specified rules.
 }
 \description{
-This function can be used to filter event data using declaritive rules. It needs a \code{log} (object of class
-\code{\link[bupaR]{log}} or derivatives, e.g. \code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}},
-\code{\link[bupaR]{activitylog}}, etc.). and a set of \code{rules}.
-Rules can be made with the following functions:
+This function can be used to filter event data using declaritive rules or constraint templates.
+It needs a \code{log} (object of class \code{\link[bupaR]{log}} or derivatives, e.g. \code{\link[bupaR]{grouped_log}},
+\code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.). and a set of \code{rules}.
+Rules can be made with the following templates:
 \itemize{
-\item \code{\link{absent}},
-\item \code{\link{and}},
-\item \code{\link{contains}},
-\item \code{\link{contains_between}},
-\item \code{\link{contains_exactly}},
-\item \code{\link{ends}},
-\item \code{\link{precedence}},
-\item \code{\link{response}},
-\item \code{\link{responded_existence}},
-\item \code{\link{starts}},
-\item \code{\link{succession}},
-\item \code{\link{xor}}.
+\item \emph{Existence}:
+\itemize{
+\item \code{\link{absent}}: Check if the specified activity is absent from a case,
+\item \code{\link{contains}}: Check if the specified activity is present (contained) in a case,
+\item \code{\link{contains_between}}: Check if the specified activity is present (contained) in a case between the minimum and maximum number of times,
+\item \code{\link{contains_exactly}}: Check if the specified activity is present (contained) in a case for exactly \code{n} times,
+\item \code{\link{ends}}: Check if cases end with the specified activity,
+\item \code{\link{starts}}: Check if cases start with the specified activity.
+}
+\item \emph{Relation}:
+\itemize{
+\item \code{\link{and}}: Check for co-existence of two activities,
+\item \code{\link{precedence}}: Check for precedence between two activities,
+\item \code{\link{response}}: Check for response between two activities,
+\item \code{\link{responded_existence}}: Check for responded existence between two activities,
+\item \code{\link{succession}}: Check for succession between two activities,
+\item \code{\link{xor}}: Check for exclusiveness of two activities.
+}
+}
+}
+\details{
+The rules or constraint templates in this package are (partially) based on \emph{DecSerFlow} (\emph{Declarative Service Flow Language}).
+For more information, see the \strong{References} below.
+\subsection{Grouped Logs}{
+
+When applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
 }
 }
 \section{Methods (by class)}{
@@ -53,6 +67,11 @@ patients \%>\%
  filter_rules(precedence("Blood test","MRI SCAN"),
               starts("Registration"))
 
+}
+\references{
+van der Aalst, W. M. P., & Pesic, M. (2006). DecSerFlow: Towards a Truly Declarative Service Flow Language.
+In M. Bravetti, M. Núñez, & G. Zavattaro (Eds.), Proceedings of the 3rd International Workshop on Web Services and Formal Methods (Vol. 4184, pp. 1–23).
+Springer. \url{https://doi.org/10.1007/11841197_1}
 }
 \seealso{
 \code{\link{check_rules}}

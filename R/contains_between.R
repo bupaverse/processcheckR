@@ -11,7 +11,7 @@
 #' @param max \code{\link{numeric}} (default `1`): The maximum number of times the activity should be present (inclusive).
 #' Should be greater than or equal to `min`.
 #'
-#' @family Declarative Rules
+#' @family Existence rules
 #'
 #' @seealso \code{\link{absent}},\code{\link{contains}},\code{\link{contains_exactly}}
 #'

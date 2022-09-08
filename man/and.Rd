@@ -29,17 +29,11 @@ patients \%>\%
 \seealso{
 \code{\link{xor}}
 
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
+Other Relation rules: 
 \code{\link{precedence}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{starts}()},
 \code{\link{succession}()},
 \code{\link{xor}()}
 }
-\concept{Declarative Rules}
+\concept{Relation rules}
