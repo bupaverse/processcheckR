@@ -55,7 +55,7 @@ filter_rules.log <- function(log, ..., eventlog = deprecated()) {
   .args <- list(...)
 
   if(length(.args) < 1) {
-    stop("At least one filtering rules should be supplied.")
+    stop("At least one filtering rule should be supplied.")
   }
 
   #.args <- as.list(match.call(expand.dots = TRUE)[-1:-2])

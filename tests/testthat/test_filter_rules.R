@@ -50,14 +50,29 @@ test_that("test filter_rules on eventlog fails when no rules supplied", {
   expect_error(
     filter <- patients %>%
       filter_rules(),
-    "*At least one filtering rules should be supplied*")
+    "*At least one filtering rule should be supplied*")
 })
 
 test_that("test filter_rules on grouped_eventlog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_grouped_resource.rda")
 
-  load("./testdata/patients_grouped.rda")
+  filter <- patients_grouped_resource %>%
+    filter(!(patient == "Jane Doe" & activity == "surgery")) %>%
+    filter_rules(start = starts(activity = "check-in"),
+                 prec = precedence("surgery", "treatment"))
+
+  expected <- patients_grouped_resource %>%
+    edeaR::filter_case("John Doe")
+
+  expect_s3_class(filter, "grouped_eventlog")
+
+  expect_equal(dim(filter), c(nrow(expected), ncol(expected)))
+  expect_true(compare::compareIgnoreOrder(colnames(expected), colnames(filter))$result)
+  expect_equal(groups(filter), groups(patients_grouped_resource))
+
+  # Only John Doe does starts with "check-in" and has "surgery" before "treatment".
+  expect_true(all(filter[[case_id(filter)]] == "John Doe"))
 })
 
 
@@ -86,7 +101,22 @@ test_that("test filter_rules on activitylog", {
 
 test_that("test filter_rules on grouped_activitylog", {
 
-  skip("grouped_log not working yet")
+  load("./testdata/patients_act_grouped_resource.rda")
 
-  load("./testdata/patients_act_grouped.rda")
+  filter <- patients_act_grouped_resource %>%
+    filter(!(patient == "Jane Doe" & activity == "surgery")) %>%
+    filter_rules(start = starts(activity = "check-in"),
+                 prec = precedence("surgery", "treatment"))
+
+  expected <- patients_act_grouped_resource %>%
+    edeaR::filter_case("John Doe")
+
+  expect_s3_class(filter, "grouped_activitylog")
+
+  expect_equal(dim(filter), c(nrow(expected), ncol(expected)))
+  expect_true(compare::compareIgnoreOrder(colnames(expected), colnames(filter))$result)
+  expect_equal(groups(filter), groups(patients_act_grouped_resource))
+
+  # Only John Doe does starts with "check-in" and has "surgery" before "treatment".
+  expect_true(all(filter[[case_id(filter)]] == "John Doe"))
 })

@@ -93,3 +93,6 @@ van der Aalst, W. M. P., & Pesic, M. (2006). DecSerFlow: Towards a Truly Declara
 In M. Bravetti, M. Núñez, & G. Zavattaro (Eds.), Proceedings of the 3rd International Workshop on Web Services and Formal Methods (Vol. 4184, pp. 1–23).
 Springer. \url{https://doi.org/10.1007/11841197_1}
 }
+\seealso{
+\code{\link{filter_rules}}
+}

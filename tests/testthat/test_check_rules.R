@@ -40,8 +40,6 @@ test_that("test check_rules on eventlog with 1 rules", {
 
 test_that("test check_rules on grouped_eventlog", {
 
-  skip("fails")
-
   load("./testdata/patients_grouped_resource.rda")
 
   check <- patients_grouped_resource %>%
@@ -85,8 +83,6 @@ test_that("test check_rules on activitylog with multiple rules", {
 })
 
 test_that("test check_rules on grouped_activitylog", {
-
-  skip("fails")
 
   load("./testdata/patients_act_grouped_resource.rda")
 
