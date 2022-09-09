@@ -8,9 +8,7 @@
 #' @param activity_a \code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.
 #' @param activity_b \code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.
 #'
-#' @family Relation rules
-#'
-#' @seealso \code{\link{xor}}
+#' @family Exclusiveness rules
 #'
 #' @examples
 #' library(bupaR)

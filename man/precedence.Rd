@@ -28,13 +28,11 @@ patients \%>\%
 
 }
 \seealso{
-\code{\link[edeaR]{filter_precedence}},\code{\link{responded_existence}},\code{\link{response}},\code{\link{succession}}
-
-Other Relation rules: 
-\code{\link{and}()},
+Other Ordering rules: 
+\code{\link{ends}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{starts}()},
+\code{\link{succession}()}
 }
-\concept{Relation rules}
+\concept{Ordering rules}

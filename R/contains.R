@@ -9,9 +9,7 @@
 #' @param n \code{\link{numeric}} (default `1`): The minimum number of times the activity should be present.
 #' Should be greater than or equal to `1`. Use \code{\link{absent}} instead to check for absent (i.e. `n = 0`) activities.
 #'
-#' @family Existence rules
-#'
-#' @seealso \code{\link{absent}},\code{\link{contains_between}},\code{\link{contains_exactly}}
+#' @family Cardinality rules
 #'
 #' @examples
 #' library(bupaR)

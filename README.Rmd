@@ -18,53 +18,62 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/processcheckR)](https://CRAN.R-project.org/package=processcheckR)
 [![R-CMD-check](https://github.com/bupaverse/processcheckR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bupaverse/processcheckR/actions/workflows/R-CMD-check.yaml)
 [![Codecov](https://codecov.io/gh/bupaverse/processcheckR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bupaverse/processcheckR?branch=master)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-The goal of processcheckR is to support rule-based conformance checking. Currently the following declarative rules can be checked:
+The goal of **processcheckR** is to support rule-based conformance checking. Currently the following declarative rules can be checked:
 
 Cardinality rules:
 
-* `exists`: activity occurs n times or more
-* `exists_exactly`: activity occurs exactly n times
-* `absent`: activity does not occur more than n - 1 times
+* `absent`: activity does not occur more than `n - 1` times,
+* `contains`: activity occurs `n` times or more,
+* `contains_between`: activity occurs between `n` and `m` times,
+* `contains_exactly`: activity occurs exactly `n` times.
 
 Ordering rules:
 
-* `starts`: case starts with activity
-* `ends`: case ends with activity
-* `succession`: if activity A happens, B should happen after. If B happens, A should have happened before.
-* `response`: if activity A happens, B should happen after
-* `precedence`: if activity B happens, A should have happend before
-* `responded_existence`: if activity A happens, B should also (have) happen(ed) (i.e. before or after A)
+* `starts`: case starts with activity,
+* `ends`: case ends with activity,
+* `succession`: if activity A happens, B should happen after. If B happens, A should have happened before,
+* `response`: if activity A happens, B should happen after,
+* `precedence`: if activity B happens, A should have happened before,
+* `responded_existence`: if activity A happens, B should also (have) happen(ed) (i.e. before or after A).
 
 Exclusiveness:
 
-* `and`: two activities always exist together
-* `xor`: two activities are not allowed to exist together
+* `and`: two activities always exist together,
+* `xor`: two activities are not allowed to exist together.
 
+Rules can be checked using the `check_rule` and `check_rules` functions (see example below). It will create a new logical variable to indicate for which cases the rule holds. The name of the variable can be configured using the `label` argument in `check_rule`.
 
-Rules can be checked using the  `check_rule` function (see example below). It will create a new logical variable to indicate for which cases the rule holds. The name of the variable can be configured using the `label` argument in  `check_rule`. 
 
 ## Installation
 
-You can install processcheckR from github with:
+You can install **processcheckR** from [CRAN](https://cran.r-project.org/) with:
+
+```{r cran-installation, eval = FALSE}
+install.packages("processcheckR")
+```
+
+### Development Version
+
+You can also install the latest (stable) development version with bugfixes and new features directly from GitHub:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("gertjanssenswillen/processcheckR")
+devtools::install_github("bupaverse/processcheckR")
 ```
 
-## Example
 
+## Example
 
 ```{r example}
 library(bupaR)
 library(processcheckR)
 sepsis %>%
-  # check if cases starts with "ER Registration"
+  # Check if cases starts with "ER Registration".
   check_rule(starts("ER Registration"), label = "r1") %>%
-  # check if activities "CRP" and "LacticAcid" occur together
+  # Check if activities "CRP" and "LacticAcid" occur together.
   check_rule(and("CRP","LacticAcid"), label = "r2") %>%
   group_by(r1, r2) %>%
   n_cases() 

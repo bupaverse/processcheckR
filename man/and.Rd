@@ -27,13 +27,7 @@ patients \%>\%
 
 }
 \seealso{
-\code{\link{xor}}
-
-Other Relation rules: 
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{succession}()},
+Other Exclusiveness rules: 
 \code{\link{xor}()}
 }
-\concept{Relation rules}
+\concept{Exclusiveness rules}

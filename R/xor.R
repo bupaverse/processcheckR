@@ -6,9 +6,7 @@
 #'
 #' @inherit and params
 #'
-#' @family Relation rules
-#'
-#' @seealso \code{\link{and}}
+#' @family Exclusiveness rules
 #'
 #' @examples
 #' library(bupaR)

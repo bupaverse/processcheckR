@@ -26,13 +26,7 @@ patients \%>\%
 
 }
 \seealso{
-\code{\link{and}}
-
-Other Relation rules: 
-\code{\link{and}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{succession}()}
+Other Exclusiveness rules: 
+\code{\link{and}()}
 }
-\concept{Relation rules}
+\concept{Exclusiveness rules}

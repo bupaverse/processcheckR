@@ -5,22 +5,25 @@
 #' \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.). and (a) `rule`(s).
 #' Rules can be made with the following templates:
 #' \itemize{
-#'  \item \emph{Existence}:
+#'  \item \emph{Cardinality}:
 #'  \itemize{
 #'      \item \code{\link{absent}}: Check if the specified activity is absent from a case,
 #'      \item \code{\link{contains}}: Check if the specified activity is present (contained) in a case,
 #'      \item \code{\link{contains_between}}: Check if the specified activity is present (contained) in a case between the minimum and maximum number of times,
-#'      \item \code{\link{contains_exactly}}: Check if the specified activity is present (contained) in a case for exactly `n` times,
-#'      \item \code{\link{ends}}: Check if cases end with the specified activity,
-#'      \item \code{\link{starts}}: Check if cases start with the specified activity.
+#'      \item \code{\link{contains_exactly}}: Check if the specified activity is present (contained) in a case for exactly `n` times.
 #'  }
 #'  \item \emph{Relation}:
 #'  \itemize{
-#'      \item \code{\link{and}}: Check for co-existence of two activities,
+#'      \item \code{\link{ends}}: Check if cases end with the specified activity,
+#'      \item \code{\link{starts}}: Check if cases start with the specified activity.
 #'      \item \code{\link{precedence}}: Check for precedence between two activities,
 #'      \item \code{\link{response}}: Check for response between two activities,
 #'      \item \code{\link{responded_existence}}: Check for responded existence between two activities,
-#'      \item \code{\link{succession}}: Check for succession between two activities,
+#'      \item \code{\link{succession}}: Check for succession between two activities.
+#'  }
+#'  \item \emph{Exclusiveness}:
+#'  \itemize{
+#'      \item \code{\link{and}}: Check for co-existence of two activities,
 #'      \item \code{\link{xor}}: Check for exclusiveness of two activities.
 #'  }
 #' }

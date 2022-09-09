@@ -22,11 +22,11 @@ patients \%>\%
 
 }
 \seealso{
-Other Existence rules: 
-\code{\link{absent}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{starts}()}
+Other Ordering rules: 
+\code{\link{precedence}()},
+\code{\link{responded_existence}()},
+\code{\link{response}()},
+\code{\link{starts}()},
+\code{\link{succession}()}
 }
-\concept{Existence rules}
+\concept{Ordering rules}

@@ -7,9 +7,7 @@
 #'
 #' @inherit and params
 #'
-#' @family Relation rules
-#'
-#' @seealso \code{\link[edeaR]{filter_precedence}},\code{\link{responded_existence}},\code{\link{response}},\code{\link{succession}}
+#' @family Ordering rules
 #'
 #' @examples
 #' library(bupaR)

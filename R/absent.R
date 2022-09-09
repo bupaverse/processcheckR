@@ -9,9 +9,7 @@
 #' @param n \code{\link{numeric}} (default \code{0}): The allowed number of occurences of the activity, e.g. `n = 0` means the activity should be absent,
 #' `n = 1` means it is allowed to occur once.
 #'
-#' @family Existence rules
-#'
-#' @seealso \code{\link{contains}},\code{\link{contains_between}},\code{\link{contains_exactly}}
+#' @family Cardinality rules
 #'
 #' @examples
 #' library(bupaR)

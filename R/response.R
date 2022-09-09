@@ -8,9 +8,7 @@
 #'
 #' @inherit and params
 #'
-#' @family Relation rules
-#'
-#' @seealso \code{\link{precedence}},\code{\link{responded_existence}},\code{\link{succession}}
+#' @family Ordering rules
 #'
 #' @examples
 #' library(bupaR)

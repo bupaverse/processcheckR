@@ -27,13 +27,9 @@ patients \%>\%
 
 }
 \seealso{
-\code{\link{absent}},\code{\link{contains}},\code{\link{contains_between}}
-
-Other Existence rules: 
+Other Cardinality rules: 
 \code{\link{absent}()},
 \code{\link{contains_between}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{starts}()}
+\code{\link{contains}()}
 }
-\concept{Existence rules}
+\concept{Cardinality rules}
