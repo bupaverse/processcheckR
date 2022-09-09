@@ -17,6 +17,7 @@ Imports:
     rlang,
     edeaR (>= 0.9.0),
     stringr,
+    stringi,
     glue,
     lifecycle,
     tidyr

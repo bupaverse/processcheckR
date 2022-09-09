@@ -14,7 +14,8 @@ precedence(activity_a, activity_b)
 \description{
 Check for precedence between two activities.
 
-If \code{activity_b} occured, it should be preceded by \code{activity_a} in the same case.
+If \code{activity_b} occured, it should be preceded by \code{activity_a} in the same case, i.e., if \code{B} was executed, it could not
+have been executed before \code{A} was executed. For example, the trace \verb{[A,C,B,B,A]} satisfies the \code{precedence} relation.
 }
 \examples{
 library(bupaR)

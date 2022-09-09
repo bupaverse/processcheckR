@@ -6,8 +6,9 @@ test_that("test filter_rules on eventlog", {
   load("./testdata/patients.rda")
 
   filter <- patients %>%
+    filter(!(patient == "Jane Doe" & activity == "surgery")) %>%
     filter_rules(start = starts(activity = "check-in"),
-                 prec = precedence("treatment", "surgery"))
+                 prec = precedence("surgery", "treatment"))
 
   expected <- patients %>%
     edeaR::filter_case("John Doe")
@@ -26,8 +27,9 @@ test_that("test filter_rules on eventlog without named rules", {
   load("./testdata/patients.rda")
 
   filter <- patients %>%
+    filter(!(patient == "Jane Doe" & activity == "surgery")) %>%
     filter_rules(starts(activity = "check-in"),
-                 precedence("treatment", "surgery"))
+                 precedence("surgery", "treatment"))
 
   expected <- patients %>%
     edeaR::filter_case("John Doe")
@@ -66,8 +68,9 @@ test_that("test filter_rules on activitylog", {
   load("./testdata/patients_act.rda")
 
   filter <- patients_act %>%
+    filter(!(patient == "Jane Doe" & activity == "surgery")) %>%
     filter_rules(start = starts(activity = "check-in"),
-                 prec = precedence("treatment", "surgery"))
+                 prec = precedence("surgery", "treatment"))
 
   expected <- patients_act %>%
     edeaR::filter_case("John Doe")

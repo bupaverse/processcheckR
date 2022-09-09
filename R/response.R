@@ -2,7 +2,9 @@
 #'
 #' @description Check for response between two activities.
 #'
-#' If `activity_a` is executed, it should be (eventually) followed by `activity_b`.
+#' If `activity_a` is executed, it should be (eventually) followed by `activity_b`. The `response` relation is very relaxed,
+#' because `B` does not have to be executed immediately after `A`, and multiple `A`s can be executed between the first `A`
+#' and the subsequent `B`. For example, the trace `[B,A,A,A,C,B]` satisfies the `response` relation.
 #'
 #' @inherit and params
 #'

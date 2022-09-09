@@ -14,7 +14,9 @@ response(activity_a, activity_b)
 \description{
 Check for response between two activities.
 
-If \code{activity_a} is executed, it should be (eventually) followed by \code{activity_b}.
+If \code{activity_a} is executed, it should be (eventually) followed by \code{activity_b}. The \code{response} relation is very relaxed,
+because \code{B} does not have to be executed immediately after \code{A}, and multiple \code{A}s can be executed between the first \code{A}
+and the subsequent \code{B}. For example, the trace \verb{[B,A,A,A,C,B]} satisfies the \code{response} relation.
 }
 \examples{
 library(bupaR)
