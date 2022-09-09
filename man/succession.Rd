@@ -14,8 +14,9 @@ succession(activity_a, activity_b)
 \description{
 Check for succession between two activities.
 
-If \code{activity_a} happens, it should be eventually followed by \code{activity_b}.
-If \code{activity_b} happens, it should be preceded by \code{activity_a}.
+\code{succession} checks the bi-directional execution order of \code{activity_a} and \code{activity_b}, i.e., both \code{\link{response}}
+and \code{\link{precedence}} relations have to hold: every \code{A} has to be (eventually) followed by \code{B}, and there has to be
+an \code{A} before every \code{B}. For example, the trace \verb{[A,C,A,B,B]} satisfies the \code{succession} relation.
 }
 \examples{
 library(bupaR)

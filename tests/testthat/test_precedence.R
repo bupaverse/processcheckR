@@ -37,6 +37,24 @@ test_that("test precedence on eventlog", {
   expect_false(any(pre[pre$patient == "Jane Doe",]$precedence_surgery_treatment))
 })
 
+test_that("test precedence on eventlog when activity_b is not present", {
+
+  load("./testdata/patients.rda")
+
+  res <- patients %>%
+    check_rule(precedence(activity_a = "check-in", activity_b = "register"))
+
+  expect_s3_class(res, "eventlog")
+
+  expect_equal(dim(res), c(nrow(patients), ncol(patients) + 1))
+  expect_equal(colnames(res), c(colnames(patients), "precedence_check_in_register"))
+
+  # George Doe lacks "check-in".
+  # John and Jane Doe lack "register", so rule is satisfied.
+  expect_true(all(res[res$patient != "George Doe",]$precedence_check_in_register))
+  expect_false(any(res[res$patient == "George Doe",]$precedence_check_in_register))
+})
+
 test_that("test precedence on eventlog fails on non-existing activity", {
 
   load("./testdata/patients.rda")
