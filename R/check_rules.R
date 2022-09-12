@@ -27,7 +27,7 @@ check_rules.log <- function(log, ..., eventlog = deprecated()) {
 check_rules_internal <- function(log, rules) {
 
   if(any(duplicated(names(rules)))) {
-    warning("Some rules have duplicate labels and will be overwritten.")
+    warn("Some rules have duplicate labels and will be overwritten.")
   }
 
   for(i in seq_along(rules)) {

@@ -35,6 +35,16 @@ test_that("test check_rule on eventlog with arg label", {
   expect_equal(check[check$patient == "George Doe",]$rule, FALSE)
 })
 
+test_that("test check_rule on eventlog with arg label already present in columns", {
+
+  load("./testdata/patients.rda")
+
+  expect_warning(
+    check <- patients %>%
+      check_rule(starts(activity = "check-in"), label = "patient"),
+    "*Column names already contain label*")
+})
+
 test_that("test check_rule on grouped_eventlog", {
 
   load("./testdata/patients_grouped_resource.rda")
@@ -71,6 +81,16 @@ test_that("test check_rule on activitylog", {
   # Only George Doe doesn't start with "check-in".
   expect_true(all(check[check$patient != "George Doe",]$starts_with_check_in))
   expect_equal(check[check$patient == "George Doe",]$starts_with_check_in, FALSE)
+})
+
+test_that("test check_rule on activitylog fails with reserved column label", {
+
+  load("./testdata/patients_act.rda")
+
+  expect_error(
+    check <- patients_act %>%
+      check_rule(starts(activity = "check-in"), label = "start"),
+    "*Label.*is a reserved column name for activitylog timestamps*")
 })
 
 test_that("test check_rule on grouped_activitylog", {

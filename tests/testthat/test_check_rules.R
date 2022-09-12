@@ -38,6 +38,28 @@ test_that("test check_rules on eventlog with 1 rules", {
   expect_equal(check[check$patient == "George Doe",]$start, FALSE)
 })
 
+test_that("test check_rules on eventlog with multiple rules with the same name", {
+
+  load("./testdata/patients.rda")
+
+  w <- capture_warnings(
+    check <- patients %>%
+      check_rules(r = starts(activity = "check-in"),
+                  r = ends(activity = "check-out")))
+
+  expect_match(w, "*Some rules have duplicate labels and will be overwritten*", all = FALSE)
+  expect_match(w, "*Column names already contain label*", all = FALSE)
+
+  expect_s3_class(check, "eventlog")
+
+  expect_equal(dim(check), c(nrow(patients), ncol(patients) + 1))
+  expect_equal(colnames(check), c(colnames(patients), "r"))
+
+  # Only George Doe doesn't end with "check-out".
+  expect_true(all(check[check$patient != "George Doe",]$r))
+  expect_equal(check[check$patient == "George Doe",]$r, FALSE)
+})
+
 test_that("test check_rules on grouped_eventlog", {
 
   load("./testdata/patients_grouped_resource.rda")

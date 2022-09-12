@@ -79,6 +79,11 @@ check_rule.log <- function(log, rule, label = NULL, eventlog = deprecated()) {
 
   if(is.null(label)) {
     label <- attr(rule, "label")
+  } else if (is.activitylog(log) & label %in% bupaR:::allowed_lifecycles) {
+    abort(glue("Label \"{label}\" is a reserved column name for activitylog timestamps ({stringi::stri_flatten(dQuote(bupaR:::allowed_lifecycles, q = FALSE), collapse = ',')}).
+    Please use another label to prevent unintended consequences."))
+  } else if (label %in% colnames(log)) {
+    warn(glue("Column names already contain label: \"{label}\". Column will be overwritten. This can have unintended consequences."))
   }
 
   log %>%

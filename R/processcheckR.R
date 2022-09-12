@@ -14,6 +14,8 @@
 #' @importFrom stringr str_replace
 #' @importFrom glue glue
 #' @importFrom lifecycle deprecated
+#' @importFrom rlang abort
+#' @importFrom rlang warn
 #' @importFrom tidyr replace_na
 ## usethis namespace: end
 
