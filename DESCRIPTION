@@ -1,19 +1,38 @@
 Package: processcheckR
 Type: Package
 Title: Rule-Based Conformance Checking of Business Process Event Data
-Version: 0.1.3
+Version: 0.1.4
 Date: 2022-10-03
-Authors@R: c(person("Gert","Janssenswillen", email = "gert.janssenswillen@uhasselt.be", role = c("aut","cre")),
-             person("Gerard","van Hulzen", email = "gerard.vanhulzen@uhasselt.be", role = "ctb")
+Authors@R: c(person("Gert", "Janssenswillen", email = "gert.janssenswillen@uhasselt.be", role = c("aut","cre")),
+             person("Gerard", "van Hulzen", email = "gerard.vanhulzen@uhasselt.be", role = c("ctb")))
 Description: Check compliance of event-data from (business) processes with respect to specified rules. Rules supported are of three types: frequency (activities that should (not) happen x number of times), order (succession between activities) and exclusiveness (and and exclusive choice between activities).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr, bupaR, rlang, edeaR, stringr, glue
-RoxygenNote: 7.1.0.9000
-Suggests: knitr,
+Depends:
+    R(>= 3.5.0)
+Imports:
+    dplyr,
+    bupaR (>= 0.5.1),
+    rlang,
+    edeaR (>= 0.9.0),
+    stringr,
+    stringi,
+    glue,
+    lifecycle,
+    tidyr
+RoxygenNote: 7.2.1
+Suggests: 
+    knitr,
     rmarkdown,
-    eventdataR
+    eventdataR,
+    covr,
+    compare,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
-URL: https://www.bupar.net, https://github.com/bupaverse/processcheckr
+URL: https://www.bupar.net,
+    https://github.com/bupaverse/processcheckr,
+    https://bupaverse.github.io/processcheckR/
 BugReports: https://github.com/bupaverse/processcheckr/issues
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)

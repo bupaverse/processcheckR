@@ -1,50 +1,75 @@
-
-
-#' Filter using declarative rules.
+#' @title Filter Using Declarative Rules
 #'
-#' This function can be used to filter event data using declaritive rules. It needs an event log and a rule. Rules can be made with the following functions:
-#' absent(),
-#' and(),
-#' contains(),
-#' contains_between(),
-#' contains_exactly(),
-#' ends(),
-#' precedence(),
-#' response(),
-#' responded_existence(),
-#' starts(),
-#' succession(),
-#' xor().
+#' @description This function can be used to filter event data using declaritive rules or constraint templates.
+#' It needs a `log` (object of class \code{\link[bupaR]{log}} or derivatives, e.g. \code{\link[bupaR]{grouped_log}},
+#' \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.). and a set of `rules`.
+#' Rules can be made with the following templates:
+#' \itemize{
+#'  \item \emph{Cardinality}:
+#'  \itemize{
+#'      \item \code{\link{absent}}: Check if the specified activity is absent from a case,
+#'      \item \code{\link{contains}}: Check if the specified activity is present (contained) in a case,
+#'      \item \code{\link{contains_between}}: Check if the specified activity is present (contained) in a case between the minimum and maximum number of times,
+#'      \item \code{\link{contains_exactly}}: Check if the specified activity is present (contained) in a case for exactly `n` times.
+#'  }
+#'  \item \emph{Relation}:
+#'  \itemize{
+#'      \item \code{\link{ends}}: Check if cases end with the specified activity,
+#'      \item \code{\link{starts}}: Check if cases start with the specified activity.
+#'      \item \code{\link{precedence}}: Check for precedence between two activities,
+#'      \item \code{\link{response}}: Check for response between two activities,
+#'      \item \code{\link{responded_existence}}: Check for responded existence between two activities,
+#'      \item \code{\link{succession}}: Check for succession between two activities.
+#'  }
+#'  \item \emph{Exclusiveness}:
+#'  \itemize{
+#'      \item \code{\link{and}}: Check for co-existence of two activities,
+#'      \item \code{\link{xor}}: Check for exclusiveness of two activities.
+#'  }
+#' }
 #'
 #' @return
+#' A filtered log (of same type as input) that satisfied the specified rules.
 #'
-#' A filtered event log.
+#' @inherit check_rule params details references
 #'
+#' @seealso \code{\link{check_rules}}
 #'
-#' @param eventlog Eventlog object
-#' @param ... rules
 #' @examples
+#' library(bupaR)
 #' library(eventdataR)
 #'
 #' # Filter where Blood test precedes MRI SCAN and Registration is the start of the case.
-#' filter_rules(patients, precedence("Blood test","MRI SCAN"),
-#'              starts("Registration"))
+#' patients %>%
+#'  filter_rules(precedence("Blood test","MRI SCAN"),
+#'               starts("Registration"))
 #'
+#' @export filter_rules
+filter_rules <- function(log, ..., eventlog = deprecated()) {
+  UseMethod("filter_rules")
+}
+
+#' @describeIn filter_rules Filter a \code{\link[bupaR]{log}} using declaritive rules.
 #' @export
-#'
-filter_rules <- function(eventlog, ...) {
+filter_rules.log <- function(log, ..., eventlog = deprecated()) {
 
+  log <- lifecycle_warning_eventlog(log, eventlog)
 
-  rules <- list(...)
-  names(rules) <- paste0("filtering_rule", seq_along(rules))
+  .args <- list(...)
 
-  for(i in seq_along(rules)) {
-    eventlog <- check_rule(eventlog, rules[[i]], label = names(rules)[i])
+  if(length(.args) < 1) {
+    stop("At least one filtering rule should be supplied.")
   }
 
-  eventlog %>%
-    filter_at(vars(starts_with("filtering_rule")), all_vars(. == T)) %>%
-    re_map(mapping(eventlog))
-  }
+  #.args <- as.list(match.call(expand.dots = TRUE)[-1:-2])
 
+  #names(rules)[3:length(rules)] <- paste0("filtering_rule", seq(from = 1, to = length(rules) - 2, by = 1))
+  #names(.args) <- paste0("filtering_rule", seq(from = 1, to = length(.args), by = 1))
+  names(.args) <- paste0("filtering_rule", seq_along(.args))
 
+  log <- do.call("check_rules_internal", list(log, .args))
+
+  log %>%
+    filter_at(vars(starts_with("filtering_rule")), all_vars(. == TRUE)) %>%
+    select_at(vars(-starts_with("filtering_rule")))
+}

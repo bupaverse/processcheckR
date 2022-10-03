@@ -2,38 +2,80 @@
 % Please edit documentation in R/filter_rules.R
 \name{filter_rules}
 \alias{filter_rules}
-\title{Filter using declarative rules.}
+\alias{filter_rules.log}
+\title{Filter Using Declarative Rules}
 \usage{
-filter_rules(eventlog, ...)
+filter_rules(log, ..., eventlog = deprecated())
+
+\method{filter_rules}{log}(log, ..., eventlog = deprecated())
 }
 \arguments{
-\item{eventlog}{Eventlog object}
+\item{log}{\code{\link[bupaR]{log}}: Object of class \code{\link[bupaR]{log}} or derivatives (\code{\link[bupaR]{grouped_log}}, \code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.).}
 
-\item{...}{rules}
+\item{...}{Name-rule pairs created by rule functions.}
+
+\item{eventlog}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}; please use \code{log} instead.}
 }
 \value{
-A filtered event log.
+A filtered log (of same type as input) that satisfied the specified rules.
 }
 \description{
-This function can be used to filter event data using declaritive rules. It needs an event log and a rule. Rules can be made with the following functions:
-absent(),
-and(),
-contains(),
-contains_between(),
-contains_exactly(),
-ends(),
-precedence(),
-response(),
-responded_existence(),
-starts(),
-succession(),
-xor().
+This function can be used to filter event data using declaritive rules or constraint templates.
+It needs a \code{log} (object of class \code{\link[bupaR]{log}} or derivatives, e.g. \code{\link[bupaR]{grouped_log}},
+\code{\link[bupaR]{eventlog}}, \code{\link[bupaR]{activitylog}}, etc.). and a set of \code{rules}.
+Rules can be made with the following templates:
+\itemize{
+\item \emph{Cardinality}:
+\itemize{
+\item \code{\link{absent}}: Check if the specified activity is absent from a case,
+\item \code{\link{contains}}: Check if the specified activity is present (contained) in a case,
+\item \code{\link{contains_between}}: Check if the specified activity is present (contained) in a case between the minimum and maximum number of times,
+\item \code{\link{contains_exactly}}: Check if the specified activity is present (contained) in a case for exactly \code{n} times.
 }
+\item \emph{Relation}:
+\itemize{
+\item \code{\link{ends}}: Check if cases end with the specified activity,
+\item \code{\link{starts}}: Check if cases start with the specified activity.
+\item \code{\link{precedence}}: Check for precedence between two activities,
+\item \code{\link{response}}: Check for response between two activities,
+\item \code{\link{responded_existence}}: Check for responded existence between two activities,
+\item \code{\link{succession}}: Check for succession between two activities.
+}
+\item \emph{Exclusiveness}:
+\itemize{
+\item \code{\link{and}}: Check for co-existence of two activities,
+\item \code{\link{xor}}: Check for exclusiveness of two activities.
+}
+}
+}
+\details{
+The rules or constraint templates in this package are (partially) based on \emph{DecSerFlow} (\emph{Declarative Service Flow Language}).
+For more information, see the \strong{References} below.
+\subsection{Grouped Logs}{
+
+When applied to a \code{\link[bupaR]{grouped_log}}, the grouping variables are ignored but retained in the returned log.
+}
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{filter_rules(log)}: Filter a \code{\link[bupaR]{log}} using declaritive rules.
+
+}}
 \examples{
+library(bupaR)
 library(eventdataR)
 
 # Filter where Blood test precedes MRI SCAN and Registration is the start of the case.
-filter_rules(patients, precedence("Blood test","MRI SCAN"),
-             starts("Registration"))
+patients \%>\%
+ filter_rules(precedence("Blood test","MRI SCAN"),
+              starts("Registration"))
 
+}
+\references{
+van der Aalst, W. M. P., & Pesic, M. (2006). DecSerFlow: Towards a Truly Declarative Service Flow Language.
+In M. Bravetti, M. Núñez, & G. Zavattaro (Eds.), Proceedings of the 3rd International Workshop on Web Services and Formal Methods (Vol. 4184, pp. 1–23).
+Springer. \url{https://doi.org/10.1007/11841197_1}
+}
+\seealso{
+\code{\link{check_rules}}
 }

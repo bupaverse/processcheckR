@@ -2,18 +2,21 @@
 % Please edit documentation in R/absent.R
 \name{absent}
 \alias{absent}
-\title{Check if an activity is absent from a case}
+\title{Absent}
 \usage{
 absent(activity, n = 0)
 }
 \arguments{
-\item{activity}{The activity to check. Character vector of length one.}
+\item{activity}{\code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{n}{n is the allowed number of occurences of the activity. E.g. n = 0 means the activity should be absent, n = 1 means it is allowed to occur once.}
+\item{n}{\code{\link{numeric}} (default \code{0}): The allowed number of occurences of the activity, e.g. \code{n = 0} means the activity should be absent,
+\code{n = 1} means it is allowed to occur once.}
 }
 \description{
-The `absent` rule can be used to check whether an activity is absent in a case or not. The `n` parameter can be configured to create a different level of _absence_.
-When n = 0, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is `n`.
+Check if the specified activity is absent from a case.
+
+The \code{absent} rule can be used to check whether an activity is absent in a case or not. The \code{n} parameter can be configured to create a different level of \emph{absence}.
+When \code{n = 0}, an activity is not allowed to occur even a single time. The maximum number of times it is allowed to occur is \code{n}.
 }
 \examples{
 library(bupaR)
@@ -21,27 +24,18 @@ library(eventdataR)
 
 # Check for which patients the activity "MRI SCAN" is absent.
 patients \%>\%
-check_rule(absent("MRI SCAN"))
+ check_rule(absent("MRI SCAN"))
 
-# Check for which patients the activity "Blood test"
-# occurs maximum a single time, but not 2 times or more.
+# Check for which patients the activity "Blood test" occurs maximum a single time,
+# but not 2 times or more.
 patients \%>\%
-check_rule(absent("Blood test", n = 1))
-
+ check_rule(absent("Blood test", n = 1))
 
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{and}()},
+Other Cardinality rules: 
 \code{\link{contains_between}()},
 \code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{contains}()}
 }
-\concept{Declarative Rules}
+\concept{Cardinality rules}

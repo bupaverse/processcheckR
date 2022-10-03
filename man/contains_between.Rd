@@ -2,43 +2,38 @@
 % Please edit documentation in R/contains_between.R
 \name{contains_between}
 \alias{contains_between}
-\title{Check if activity is present (contained) in a case between  min and max number of times}
+\title{Contains Between}
 \usage{
 contains_between(activity, min = 1, max = 1)
 }
 \arguments{
-\item{activity}{Activity too check. Character vector of length one. This should be an activity of the event log supplied with `check_rule`}
+\item{activity}{\code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{min}{The minimum number of times the activity should be present.}
+\item{min}{\code{\link{numeric}} (default \code{1}): The minimum number of times the activity should be present (inclusive).
+Should be greater than or equal to \code{0}.}
 
-\item{max}{The maximum number of times the activity should be present.}
+\item{max}{\code{\link{numeric}} (default \code{1}): The maximum number of times the activity should be present (inclusive).
+Should be greater than or equal to \code{min}.}
 }
 \description{
-This rules examines whether the supplied activity is present in a case for a certain interval of times.
-The arguments `min` and `max` can be used to specify the allowed interval of occurences.
+Check if the specified activity is present (contained) in a case between the minimum and maximum number of times.
+
+The \code{contains_between} rule examines whether the supplied \code{activity} is present in a case for a certain interval of times.
+The arguments \code{min} and \code{max} can be used to specify the allowed interval of occurences.
 }
 \examples{
 library(bupaR)
 library(eventdataR)
 
-
 # A patients should have between 0 and 4 blood tests (including 0 and 4).
 patients \%>\%
-check_rule(contains_between("Blood test", min = 0, max = 4))
+ check_rule(contains_between("Blood test", min = 0, max = 4))
 
 }
 \seealso{
-Other Declarative Rules: 
+Other Cardinality rules: 
 \code{\link{absent}()},
-\code{\link{and}()},
 \code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{contains}()}
 }
-\concept{Declarative Rules}
+\concept{Cardinality rules}

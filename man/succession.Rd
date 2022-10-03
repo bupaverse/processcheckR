@@ -2,18 +2,21 @@
 % Please edit documentation in R/succession.R
 \name{succession}
 \alias{succession}
-\title{Check succession between two activities}
+\title{Succession}
 \usage{
 succession(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity A happens, it should be eventually followed by activity B.
-If activity B happens, it should be preceded by activity A.
+Check for succession between two activities.
+
+\code{succession} checks the bi-directional execution order of \code{activity_a} and \code{activity_b}, i.e., both \code{\link{response}}
+and \code{\link{precedence}} relations have to hold: every \code{A} has to be (eventually) followed by \code{B}, and there has to be
+an \code{A} before every \code{B}. For example, the trace \verb{[A,C,A,B,B]} satisfies the \code{succession} relation.
 }
 \examples{
 library(bupaR)
@@ -22,21 +25,15 @@ library(eventdataR)
 # Blood test should always happen before a MRI Scan,
 # and both should happen when one of them happens.
 patients \%>\%
-check_rule(succession("Blood test","MRI SCAN"))
+ check_rule(succession("Blood test","MRI SCAN"))
 
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
+Other Ordering rules: 
 \code{\link{ends}()},
 \code{\link{precedence}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{xor}()}
+\code{\link{starts}()}
 }
-\concept{Declarative Rules}
+\concept{Ordering rules}
