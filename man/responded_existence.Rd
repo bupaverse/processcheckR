@@ -2,42 +2,37 @@
 % Please edit documentation in R/responded_existence.R
 \name{responded_existence}
 \alias{responded_existence}
-\title{Check for responded existence between two activity}
+\title{Responded Existence}
 \usage{
 responded_existence(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity A occurs in a case, activity B should also occur (before or after).
+Check for responded existence between two activities.
+
+If \code{activity_a} occurs in a case, \code{activity_b} should also occur (before or after).
 }
 \examples{
 library(bupaR)
 library(eventdataR)
 
-
 # When a Blood test occurs, a MRI Scan should also have
 # happened for this patient (before or after the test).
 
 patients \%>\%
-check_rule(responded_existence("Blood test","MRI SCAN"))
+ check_rule(responded_existence("Blood test","MRI SCAN"))
 
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
+Other Ordering rules: 
 \code{\link{ends}()},
 \code{\link{precedence}()},
 \code{\link{response}()},
 \code{\link{starts}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{succession}()}
 }
-\concept{Declarative Rules}
+\concept{Ordering rules}

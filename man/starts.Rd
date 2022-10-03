@@ -2,15 +2,15 @@
 % Please edit documentation in R/starts.R
 \name{starts}
 \alias{starts}
-\title{Check if cases start with an activity}
+\title{Starts}
 \usage{
 starts(activity)
 }
 \arguments{
-\item{activity}{The start activity. Character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity}{\code{\link{character}}: The start activity. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-Check if cases start with an activity
+Check if cases start with the specified activity.
 }
 \examples{
 library(bupaR)
@@ -18,21 +18,15 @@ library(eventdataR)
 
 # Each patients should first be registered.
 patients \%>\%
-check_rule(starts("Registration"))
+ check_rule(starts("Registration"))
 
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
+Other Ordering rules: 
 \code{\link{ends}()},
 \code{\link{precedence}()},
 \code{\link{responded_existence}()},
 \code{\link{response}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{succession}()}
 }
-\concept{Declarative Rules}
+\concept{Ordering rules}
