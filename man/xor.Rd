@@ -2,38 +2,31 @@
 % Please edit documentation in R/xor.R
 \name{xor}
 \alias{xor}
-\title{Check for exclusiveness of two activities}
+\title{XOR}
 \usage{
 xor(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-If activity A exists, Activity B should not exist, and vice versa.
+Check for exclusiveness of two activities.
+
+If \code{activity_a} exists, \code{activity_b} should not exist, and vice versa.
 }
 \examples{
 library(bupaR)
 library(eventdataR)
 
-# A patient should not receive both an X-Ray and MRI Scan
+# A patient should not receive both an X-Ray and MRI Scan.
 patients \%>\%
-check_rule(xor("X-Ray","MRI SCAN"))
+ check_rule(xor("X-Ray","MRI SCAN"))
+
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{and}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()}
+Other Exclusiveness rules: 
+\code{\link{and}()}
 }
-\concept{Declarative Rules}
+\concept{Exclusiveness rules}

@@ -7,3 +7,4 @@
 \description{
 Tools to check declarative rules in event logs.
 }
+\keyword{internal}

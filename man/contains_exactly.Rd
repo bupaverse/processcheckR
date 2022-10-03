@@ -2,40 +2,34 @@
 % Please edit documentation in R/contains_exactly.R
 \name{contains_exactly}
 \alias{contains_exactly}
-\title{Check if activity is present (contained) in a case for exactly n times}
+\title{Contains Exactly}
 \usage{
 contains_exactly(activity, n = 1)
 }
 \arguments{
-\item{activity}{Activity too check. A character vector of length one. This should be an activity of the event log supplied to `check_rule`.}
+\item{activity}{\code{\link{character}}: The activity to check. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{n}{The exact number of times the activity should be present.}
+\item{n}{\code{\link{numeric}} (default \code{1}): The exact number of times the activity should be present.
+Should be greater than or equal to \code{1}. Use \code{\link{absent}} instead to check for absent (i.e. \code{n = 0}) activities.}
 }
 \description{
-This rules examines whether the supplied activity is present in a case for an exact number of times.
+Check if the specified activity is present (contained) in a case for exactly \code{n} times.
+
+The \code{contains_exactly} rule examines whether the supplied \code{activity} is present in a case for an exact number of \code{n} times.
 }
 \examples{
 library(bupaR)
 library(eventdataR)
 
 # Each patient should have exactly one registration activity instance.
-
 patients \%>\%
-check_rule(contains_exactly("Registration", n = 1))
+ check_rule(contains_exactly("Registration", n = 1))
 
 }
 \seealso{
-Other Declarative Rules: 
+Other Cardinality rules: 
 \code{\link{absent}()},
-\code{\link{and}()},
 \code{\link{contains_between}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()},
-\code{\link{xor}()}
+\code{\link{contains}()}
 }
-\concept{Declarative Rules}
+\concept{Cardinality rules}

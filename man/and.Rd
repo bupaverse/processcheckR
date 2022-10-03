@@ -2,18 +2,20 @@
 % Please edit documentation in R/and.R
 \name{and}
 \alias{and}
-\title{Check for co-existence of two activities}
+\title{AND}
 \usage{
 and(activity_a, activity_b)
 }
 \arguments{
-\item{activity_a}{Activity A. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_a}{\code{\link{character}}: Activity A. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 
-\item{activity_b}{Activity B. A character vector of length one. This should be an activity of the event log supplied to  `check_rule`.}
+\item{activity_b}{\code{\link{character}}: Activity B. This should be an activity of the log supplied to \code{\link{check_rule}}.}
 }
 \description{
-The`and` rule checks whether two activities both occur in a case (or are both absent).
-If activity A exists, Activity B should also exist, and vice versa.
+Check for co-existence of two activities.
+
+The\code{and} rule checks whether two activities both occur in a case (or are both absent).
+If \code{activity_a} exists, \code{activity_b} should also exist, and vice versa.
 }
 \examples{
 library(bupaR)
@@ -21,21 +23,11 @@ library(eventdataR)
 
 # Check that if a patients is registered, he's also checked-out, and vice versa.
 patients \%>\%
-check_rule(and("Registration","Check-out"))
+ check_rule(and("Registration","Check-out"))
 
 }
 \seealso{
-Other Declarative Rules: 
-\code{\link{absent}()},
-\code{\link{contains_between}()},
-\code{\link{contains_exactly}()},
-\code{\link{contains}()},
-\code{\link{ends}()},
-\code{\link{precedence}()},
-\code{\link{responded_existence}()},
-\code{\link{response}()},
-\code{\link{starts}()},
-\code{\link{succession}()},
+Other Exclusiveness rules: 
 \code{\link{xor}()}
 }
-\concept{Declarative Rules}
+\concept{Exclusiveness rules}

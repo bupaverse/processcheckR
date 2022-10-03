@@ -12,6 +12,8 @@
 /*.Rcheck/
 # RStudio files
 .Rproj.user/
+# IntelliJ files
+.idea/
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -24,3 +26,4 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 inst/doc
+docs
